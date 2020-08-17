@@ -403,9 +403,9 @@ namespace WzComparerR2
             {
                 return;
             }
-            var aniItem = this.pictureBoxEx1.Items[0];
-
             var config = ImageHandlerConfig.Default;
+
+            var aniItem = this.pictureBoxEx1.Items[0];
 
             //单帧图像
             var frameData = (aniItem as FrameAnimator)?.Data;
@@ -414,26 +414,30 @@ namespace WzComparerR2
                 var frame = frameData.Frames[0];
                 if (frame.Png != null)
                 {
+                    string pngFileName = pictureBoxEx1.PictureName + ".png";
+
+                    if (config.AutoSaveEnabled)
+                    {
+                        pngFileName = Path.Combine(config.AutoSavePictureFolder, string.Join("_", pngFileName.Split(Path.GetInvalidFileNameChars(), StringSplitOptions.None)));
+                    }
+                    else
+                    {
+                        var dlg = new SaveFileDialog();
+                        dlg.Filter = "PNG (*.png)|*.png|모든 파일 (*.*)|*.*";
+                        dlg.FileName = pngFileName;
+                        if (dlg.ShowDialog() != DialogResult.OK)
+                        {
+                            return;
+                        }
+
+                        pngFileName = dlg.FileName;
+                    }
+
                     using (var bmp = frame.Png.ExtractPng())
                     {
-                        string pngFileName = pictureBoxEx1.PictureName + ".png";
-                        if (config.AutoSaveEnabled)
-                        {
-                            pngFileName = Path.Combine(config.AutoSavePictureFolder, string.Join("_", pngFileName.Split(Path.GetInvalidFileNameChars(), StringSplitOptions.None)));
-                        }
-                        else
-                        {
-                            var dlg = new SaveFileDialog();
-                            dlg.Filter = "PNG (*.png)|*.png|모든 파일 (*.*)|*.*";
-                            dlg.FileName = pngFileName;
-                            if (dlg.ShowDialog() != DialogResult.OK)
-                            {
-                                return;
-                            }
-                            pngFileName = dlg.FileName;
-                        }
                         bmp.Save(pngFileName, System.Drawing.Imaging.ImageFormat.Png);
                     }
+                    labelItemStatus.Text = "그림 저장 완료: " + pngFileName;
                 }
                 else
                 {

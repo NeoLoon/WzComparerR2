@@ -100,7 +100,7 @@ namespace WzComparerR2.CharaSim
                 case GearPropType.incBDR:
                 case GearPropType.bdR: return "보스 몬스터 공격 시 데미지 +" + value + "%";
                 case GearPropType.incIMDR:
-                case GearPropType.imdR: return "몬스터 방어력 무시 : +" + value + "%";
+                case GearPropType.imdR: return "몬스터 방어율 무시 : +" + value + "%";
                 //case GearPropType.limitBreak: return "최대 데미지 제한 증가 : +" + value;
                 case GearPropType.reduceReq: return "착용 레벨 감소 : - " + value;
                 case GearPropType.nbdR: return "일반 몬스터 공격 시 데미지 : +" + value + "%";
@@ -344,7 +344,6 @@ namespace WzComparerR2.CharaSim
 
                 case GearType.tuner: return "튜너";
                 case GearType.bracelet: return "브레이슬릿";
-
                 default: return null;
             }
         }
@@ -444,7 +443,7 @@ namespace WzComparerR2.CharaSim
 
                 //6xxx
                 case GearType.novaMarrow: return GetExtraJobReqString(61);
-                //case GearType.chain2:
+                case GearType.chain2:
                 case GearType.transmitter: return GetExtraJobReqString(64);
                 case GearType.soulBangle:
                 case GearType.soulShooter: return GetExtraJobReqString(65);
@@ -459,13 +458,14 @@ namespace WzComparerR2.CharaSim
                 case GearType.espLimiter:
                 case GearType.chess: return GetExtraJobReqString(142);
 
-                case GearType.tuner:
-                case GearType.bracelet: return GetExtraJobReqString(151);
                 case GearType.magicGauntlet:
                 case GearType.magicWing: return GetExtraJobReqString(152);
 
                 case GearType.pathOfAbyss: return GetExtraJobReqString(155);
                 case GearType.fanTassel: return GetExtraJobReqString(164);
+
+                case GearType.tuner:
+                case GearType.bracelet: return GetExtraJobReqString(151);
                 default: return null;
             }
         }

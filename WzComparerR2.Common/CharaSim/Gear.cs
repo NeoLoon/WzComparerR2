@@ -184,12 +184,8 @@ namespace WzComparerR2.CharaSim
         /// <returns></returns>
         public static bool IsLeftWeapon(GearType type)
         {
-            int _type = (int)type;
-            if (type == GearType.shiningRod || type == GearType.tuner)
-            {
-                _type = (int)type / 10;
-            }
-            return _type >= 121 && _type <= 139 && type != GearType.katara;
+            return (int)type >= 121 && (int)type <= 139 && type != GearType.katara
+                || ((int)type / 10) == 121;
         }
 
         public static bool IsSubWeapon(GearType type)
@@ -349,6 +345,10 @@ namespace WzComparerR2.CharaSim
                     return GearType.soulShield;
                 case 1099:
                     return GearType.demonShield;
+                case 1212:
+                    return GearType.shiningRod;
+                case 1213:
+                    return GearType.tuner;
             }
             if (code / 10000 == 135)
             {
@@ -369,15 +369,6 @@ namespace WzComparerR2.CharaSim
                 {
                     case 11902:
                         return (GearType)(code / 10);
-                }
-            }
-            if (code / 10000 == 121)
-            {
-                switch (code / 1000)
-                {
-                    case 1212:
-                    case 1213:
-                        return (GearType)(code / 1000);
                 }
             }
             return (GearType)(code / 10000);

@@ -147,7 +147,7 @@ namespace WzComparerR2.CharaSim
         /// </summary>
         shiningRod = 1212,
         /// <summary>
-        /// 튜너 1213
+        /// 调谐器 1213
         /// </summary>
         tuner = 1213,
         /// <summary>
@@ -355,7 +355,7 @@ namespace WzComparerR2.CharaSim
         /// </summary>
         fanTassel = 135380,
         /// <summary>
-        /// 브레이슬릿 135400x
+        /// 手链 135400x
         /// </summary>
         bracelet = 135400,
         /// <summary>

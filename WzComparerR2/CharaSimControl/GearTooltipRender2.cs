@@ -281,6 +281,7 @@ namespace WzComparerR2.CharaSimControl
             //分割线1号
             picH += 7;
             g.DrawImage(res["dotline"].Image, 0, picH);
+            picH += 1;
 
             //绘制装备图标
             if (Gear.Grade > 0 && (int)Gear.Grade <= 4) //绘制外框
@@ -550,22 +551,6 @@ namespace WzComparerR2.CharaSimControl
                 {
                     GearGraphics.DrawPlainText(g, ItemStringHelper.GetGearPropString(GearPropType.superiorEqp, value), GearGraphics.EquipDetailFont, ((SolidBrush)GearGraphics.GreenBrush2).Color, 13, 244, ref picH, 15);
                 }
-
-                /*if (!Gear.GetBooleanValue(GearPropType.exceptUpgrade))
-                {
-                    int maxStar = Gear.GetMaxStar();
-
-                    if (Gear.Star > 0) //星星
-                    {
-                        TextRenderer.DrawText(g, Gear.Star + "성 강화 적용 (최대 " + maxStar + "성)", GearGraphics.EquipDetailFont, new Point(13, picH), Color.White, TextFormatFlags.NoPadding);
-                        picH += 15;
-                    }
-                    else
-                    {
-                        TextRenderer.DrawText(g, "최대 " + maxStar + "성까지 강화 가능", GearGraphics.EquipDetailFont, new Point(13, picH), Color.White, TextFormatFlags.NoPadding);
-                        picH += 15;
-                    }
-                }*/
             }
 
             if (Gear.Props.TryGetValue(GearPropType.limitBreak, out value) && value > 0) //突破上限
@@ -1444,7 +1429,7 @@ namespace WzComparerR2.CharaSimControl
                     }
                     picH += 18;
                 }
-                picH -= 1;
+                //picH -= 1;
             }
         }
 
