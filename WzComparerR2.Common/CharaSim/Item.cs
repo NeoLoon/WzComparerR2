@@ -12,15 +12,18 @@ namespace WzComparerR2.CharaSim
         {
             this.Props = new Dictionary<ItemPropType, int>();
             this.Specs = new Dictionary<ItemSpecType, int>();
+            this.AddTooltips = new List<int>();
         }
 
         public int Level { get; set; }
+        public string ConsumableFrom { get; set; }
         public string EndUseDate { get; set; }
 
         public List<GearLevelInfo> Levels { get; internal set; }
 
         public Dictionary<ItemPropType, int> Props { get; private set; }
         public Dictionary<ItemSpecType, int> Specs { get; private set; }
+        public List<int> AddTooltips { get; internal set; } // Additional Tooltips
 
         public bool Cash
         {
@@ -101,6 +104,10 @@ namespace WzComparerR2.CharaSim
 
                         case "lv":
                             item.Level = Convert.ToInt32(subNode.Value);
+                            break;
+
+                        case "consumableFrom":
+                            item.ConsumableFrom = Convert.ToString(subNode.Value);
                             break;
 
                         case "endUseDate":
@@ -208,6 +215,20 @@ namespace WzComparerR2.CharaSim
                                 }
                             }
                             item.Props.Add(ItemPropType.level, 1);
+                            break;
+
+                        case "addTooltip":
+                            if (subNode.Nodes.Count > 0)
+                            {
+                                foreach (Wz_Node tooltipNode in subNode.Nodes)
+                                {
+                                    item.AddTooltips.Add(Convert.ToInt32(tooltipNode.Value));
+                                }
+                            }
+                            else
+                            {
+                                item.AddTooltips.Add(Convert.ToInt32(subNode.Value));
+                            }
                             break;
 
                         default:

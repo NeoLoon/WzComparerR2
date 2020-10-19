@@ -605,7 +605,7 @@ namespace WzComparerR2.Avatar
             //根骨骼 作为角色原点
             Bone bodyRoot = new Bone("@root");
             bodyRoot.Position = Point.Empty;
-            CreateBone(bodyRoot, playerNodes, bodyAction.Face);
+            CreateBone(bodyRoot, playerNodes, bodyAction?.Face);
             SetBonePoperty(bodyRoot, BoneGroup.Character, bodyAction);
 
             if (tamingNodes != null && tamingNodes.Length > 0)

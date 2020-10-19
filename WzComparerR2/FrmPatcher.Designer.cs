@@ -880,9 +880,9 @@
             this.chkResolvePngLink.Name = "chkResolvePngLink";
             this.chkResolvePngLink.Size = new System.Drawing.Size(95, 16);
             this.chkResolvePngLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkResolvePngLink, new DevComponents.DotNetBar.SuperTooltipInfo("PNG 링크 문제 해결", "", "링크된 PNG와 비교하여 같을 경우 출력하지 않습니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 72)));
+            this.superTooltip1.SetSuperTooltip(this.chkResolvePngLink, new DevComponents.DotNetBar.SuperTooltipInfo("PNG 링크 따라가기", "", "링크된 PNG와 비교하여 같을 경우 출력하지 않습니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 72)));
             this.chkResolvePngLink.TabIndex = 18;
-            this.chkResolvePngLink.Text = "PNG 링크 문제 해결";
+            this.chkResolvePngLink.Text = "PNG 링크 따라가기";
             // 
             // FrmPatcher
             // 

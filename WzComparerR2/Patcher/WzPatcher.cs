@@ -401,7 +401,7 @@ namespace WzComparerR2.Patcher
             part.TempFilePath = tempFileName;
             this.OnTempFileCreated(part);
             //创建文件同时计算checksum
-            uint checkSum1 = StreamUtils.MoveStreamWithCrc32(this.inflateStream, tempFileStream, part.NewFileLength, 0U);
+            uint checkSum1 = StreamUtils.MoveStreamWithCrc32(this.inflateStream, tempFileStream, part.NewFileLength, 0U, this.PatchingStateChanged);
             tempFileStream.Flush();
 
             this.OnVerifyNewChecksumBegin(part);
@@ -423,7 +423,7 @@ namespace WzComparerR2.Patcher
             this.OnVerifyOldChecksumBegin(part);
             FileStream oldWzFile = new FileStream(part.OldFilePath, FileMode.Open, FileAccess.Read, FileShare.Read,
                 0x4000, FileOptions.Asynchronous | FileOptions.RandomAccess);
-            uint oldCheckSum1 = CheckSum.ComputeHash(oldWzFile, (int)oldWzFile.Length); //旧版本文件实际hash
+            uint oldCheckSum1 = CheckSum.ComputeHash(oldWzFile, (int)oldWzFile.Length, this.PatchingStateChanged); //旧版本文件实际hash
             this.OnVerifyOldChecksumEnd(part);
 
             try

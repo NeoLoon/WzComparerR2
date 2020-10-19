@@ -2332,7 +2332,7 @@
             this.chkResolvePngLink.Size = new System.Drawing.Size(107, 23);
             this.chkResolvePngLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkResolvePngLink.TabIndex = 9;
-            this.chkResolvePngLink.Text = "PNG 링크 문제 해결";
+            this.chkResolvePngLink.Text = "PNG 링크 따라가기";
             // 
             // chkOutputRemovedImg
             // 

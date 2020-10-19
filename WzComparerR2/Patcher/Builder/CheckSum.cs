@@ -115,29 +115,37 @@ namespace WzComparerR2.Patcher.Builder
             return crc;
         }
 
-        public static uint ComputeHash(Stream stream, long length)
+        public static uint ComputeHash(Stream stream, long length, EventHandler<PatchingEventArgs> PatchingStateChanged = null)
         {
             FileStream fs = stream as FileStream;
             if (fs != null && fs.IsAsync)
             {
-                return ComputeHashAsync(fs, length, 0);
+                return ComputeHashAsync(fs, length, 0, PatchingStateChanged);
             }
             else
             {
-                return ComputeHash(stream, length, 0);
+                return ComputeHash(stream, length, 0, PatchingStateChanged);
             }
         }
 
-        public static uint ComputeHashAsync(FileStream stream, long length, uint crc)
+        public static uint ComputeHashAsync(FileStream stream, long length, uint crc, EventHandler<PatchingEventArgs> PatchingStateChanged = null)
         {
-            var hash = new AsyncFileHash(stream, length);
+            var hash = new AsyncFileHash(stream, length, PatchingStateChanged);
             crc = hash.Compute(crc);
             return crc;
         }
 
-        public static unsafe uint ComputeHash(Stream stream, long length, uint crc)
+        public static unsafe uint ComputeHash(Stream stream, long length, uint crc, EventHandler<PatchingEventArgs> PatchingStateChanged = null)
         {
             byte[] buffer = new byte[0x8000];
+            PatchPartContext part = new PatchPartContext("", 0, 0);
+            part.NewFileLength = (int)length;
+
+            double patchProc = 0;
+            const double patchProcReportInverval = 0.005;
+            long patchLength = 0;
+            const long patchLengthReportInterval = 1 * 1024 * 1024;
+
             while (length > 0)
             {
                 int count = stream.Read(buffer, 0, (int)Math.Min(buffer.Length, length));
@@ -147,6 +155,17 @@ namespace WzComparerR2.Patcher.Builder
                 }
                 crc = ComputeHash(buffer, 0, count, crc);
                 length -= count;
+                if (PatchingStateChanged != null && part.NewFileLength > 0)
+                {
+                    long curLength = part.NewFileLength - length;
+                    double curProc = 1.0 * curLength / part.NewFileLength;
+                    if (curProc - patchProc >= patchProcReportInverval && curLength - patchLength >= patchLengthReportInterval)// || curProc >= 1 - patchProcReportInverval)
+                    {
+                        PatchingStateChanged(null, new PatchingEventArgs(part, PatchingState.TempFileBuildProcessChanged, curLength));//更新进度改变
+                        patchProc = curProc;
+                        patchLength = curLength;
+                    }
+                }
             }
             return crc;
         }
@@ -191,14 +210,16 @@ namespace WzComparerR2.Patcher.Builder
 
         private class AsyncFileHash
         {
-            public AsyncFileHash(FileStream fs, long length)
+            public AsyncFileHash(FileStream fs, long length, EventHandler<PatchingEventArgs> PatchingStateChanged = null)
             {
                 this.fs = fs;
                 this.length = length;
                 this.crc = crc;
                 this.evCheckSum = new AutoResetEvent(false);
                 this.evCallBack = new AutoResetEvent(true);
-                
+                this.PatchingStateChanged = PatchingStateChanged;
+                this.part = new PatchPartContext("", 0, 0);
+                this.part.NewFileLength = (int)length;
             }
 
             FileStream fs;
@@ -206,8 +227,15 @@ namespace WzComparerR2.Patcher.Builder
             AutoResetEvent evCheckSum;
             AutoResetEvent evCallBack;
             uint crc;
+            EventHandler<PatchingEventArgs> PatchingStateChanged;
+            PatchPartContext part;
             byte[] buffer1 = new byte[0x20000];
             byte[] buffer2 = new byte[0x20000];
+
+            double patchProc = 0;
+            const double patchProcReportInverval = 0.005;
+            long patchLength = 0;
+            const long patchLengthReportInterval = 1 * 1024 * 1024;
 
             public uint Compute(uint crc)
             {
@@ -236,6 +264,17 @@ namespace WzComparerR2.Patcher.Builder
                     Begin(nextBuffer);
                 }
                 this.crc = CheckSum.ComputeHash(buffer, 0, count, this.crc);
+                if (this.PatchingStateChanged != null && this.part.NewFileLength > 0)
+                {
+                    long curLength = this.part.NewFileLength - length;
+                    double curProc = 1.0 * curLength / this.part.NewFileLength;
+                    if (curProc - this.patchProc >= patchProcReportInverval && curLength - this.patchLength >= patchLengthReportInterval)// || curProc >= 1 - patchProcReportInverval)
+                    {
+                        this.PatchingStateChanged(null, new PatchingEventArgs(part, PatchingState.TempFileBuildProcessChanged, curLength));//更新进度改变
+                        this.patchProc = curProc;
+                        this.patchLength = curLength;
+                    }
+                }
                 this.evCallBack.Set();
 
                 if (doEnd)
