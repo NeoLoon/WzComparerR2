@@ -2715,6 +2715,21 @@ namespace WzComparerR2
             labelItemStatus.Text = "세트 아이템 " + count + "개 정리 완료";
         }
 
+        private void buttonItemClearExclusiveEquips_Click(object sender, EventArgs e)
+        {
+            int count = CharaSimLoader.LoadedExclusiveEquips.Count;
+            CharaSimLoader.LoadedExclusiveEquips.Clear();
+            labelItemStatus.Text = "중복 착용 불가 아이템 " + count + "개 정리 완료";
+        }
+
+        private void buttonItemClearCommodities_Click(object sender, EventArgs e)
+        {
+            int count = CharaSimLoader.LoadedCommoditiesBySN.Count;
+            CharaSimLoader.LoadedCommoditiesBySN.Clear();
+            CharaSimLoader.LoadedCommoditiesByItemId.Clear();
+            labelItemStatus.Text = "캐시 아이템 " + count + "개 정리 완료";
+        }
+
         private void buttonItemCharItem_CheckedChanged(object sender, EventArgs e)
         {
             if (buttonItemCharItem.Checked)

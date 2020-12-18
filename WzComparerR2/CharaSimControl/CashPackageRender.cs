@@ -99,9 +99,14 @@ namespace WzComparerR2.CharaSimControl
 
                 SizeF nameSize = TextRenderer.MeasureText(g, name.Replace(Environment.NewLine, ""), GearGraphics.ItemDetailFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
                 if (commodity.Bonus == 0)
-                    nameSize.Width += 55 + 8;
+                {
+                    if (commodity.originalPrice > 0 && commodity.Price < commodity.originalPrice)
+                        nameSize.Width += 55 + 31 + 6 + 8;
+                    else
+                        nameSize.Width += 55 + 8;
+                }
                 else
-                    nameSize.Width += 55 + 38 + 8 - 1;
+                    nameSize.Width += 55 + 38 + 6 + 8;
                 if (CashPackage.SN.Count < 8)
                 {
                     if (nameSize.Width > titleSize.Width)
@@ -138,18 +143,26 @@ namespace WzComparerR2.CharaSimControl
             picH = 10;
             TextRenderer.DrawText(g, CashPackage.name, GearGraphics.ItemNameFont2, new Point(cashBitmap.Width, picH), Color.White, TextFormatFlags.HorizontalCenter | TextFormatFlags.NoPrefix);
             picH += 14;
-            if (commodityPackage.termStart > 0 || commodityPackage.termEnd > 0)
+            if (commodityPackage.termStart > 0 || commodityPackage.termEnd != null)
             {
                 string term = "< 판매기간 :";
                 if (commodityPackage.termStart > 0)
-                    term += string.Format(" {0}년{1}월{2}일", commodityPackage.termStart / 1000000, (commodityPackage.termStart / 10000) % 100, (commodityPackage.termStart / 100) % 100);
-                if (commodityPackage.termStart > 0 && commodityPackage.termEnd > 0)
+                    term += string.Format(" {0}년 {1}월 {2}일", commodityPackage.termStart / 1000000, (commodityPackage.termStart / 10000) % 100, (commodityPackage.termStart / 100) % 100);
+
+                if (commodityPackage.termStart > 0 && commodityPackage.termEnd != null)
                     term += "\n~";
                 else
                     term += " ~";
-                if (commodityPackage.termEnd > 0)
-                    term += string.Format(" {0}년{1}월{2}일", commodityPackage.termEnd / 1000000, (commodityPackage.termEnd / 10000) % 100, (commodityPackage.termEnd / 100) % 100);
+
+                if (commodityPackage.termEnd != null)
+                {
+                    int termEndDate = Convert.ToInt32(commodityPackage.termEnd.Split('/')[0]);
+                    int termEndTime = Convert.ToInt32(commodityPackage.termEnd.Split('/')[1]);
+                    term += string.Format(" {0}년 {1}월 {2}일 {3}시 {4}분 {5}초", termEndDate / 10000, (termEndDate / 100) % 100, termEndDate % 100, termEndTime / 10000, (termEndTime / 100) % 100, termEndTime % 100);
+                }
                 term += " >";
+
+                picH += 8;
                 TextRenderer.DrawText(g, term, GearGraphics.ItemDetailFont2, new Point(cashBitmap.Width, picH), ((SolidBrush)GearGraphics.OrangeBrush4).Color, TextFormatFlags.HorizontalCenter);
                 picH += 12 * term.Split('\n').Length;
             }
@@ -183,14 +196,14 @@ namespace WzComparerR2.CharaSimControl
             if (CashPackage.desc != null && CashPackage.desc.Length > 0)
                 CashPackage.desc += "\n";
             if (CashPackage.onlyCash == 0)
-                GearGraphics.DrawString(g, CashPackage.desc + "\n#(보너스 아이템 제외) 넥슨캐시로 구매하면 사용 전 1회에 한해 타인과 교환 할 수 있습니다.#", GearGraphics.ItemDetailFont2, 11, right, ref picH, 16);
+                GearGraphics.DrawString(g, CashPackage.desc + "\n#넥슨캐시로 구매하면 사용 전 1회에 한해 타인과 교환 할 수 있습니다. (보너스 아이템 제외)#", GearGraphics.ItemDetailFont2, 11, right, ref picH, 16);
             else
                 GearGraphics.DrawString(g, CashPackage.desc + "\n#넥슨캐시로만 구매할 수 있습니다.#", GearGraphics.ItemDetailFont2, 11, right, ref picH, 16);
 
             bool hasLine = false;
             picH -= 4;
 
-            int picH0 = picH, columnLeft = 0, columnRight;
+            int picStartH = picH, picEndH = 0, columnLeft = 0, columnRight;
             if (CashPackage.SN.Count < 8)
                 columnRight = cashBitmap.Width;
             else
@@ -201,7 +214,8 @@ namespace WzComparerR2.CharaSimControl
                 if (CashPackage.SN.Count >= 8 && i == (CashPackage.SN.Count + 1) / 2)
                 {
                     hasLine = false;
-                    picH = picH0;
+                    picEndH = picH;
+                    picH = picStartH;
                     columnLeft = (int)Math.Ceiling(titleSize.Height) - 2;
                     columnRight = cashBitmap.Width;
                 }
@@ -323,7 +337,7 @@ namespace WzComparerR2.CharaSimControl
                             int width = TextRenderer.MeasureText(g, info.Substring(0, info.IndexOf("      ")), GearGraphics.ItemDetailFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width;
                             g.DrawLine(Pens.White, columnLeft + 55, picH + 33 + 4, columnLeft + 55 + width + 1, picH + 33 + 4);
                             g.DrawImage(Resource.CSDiscount_arrow, columnLeft + 55 + width + 10, picH + 33 + 1);
-                            DrawDiscountNum(g, "-" + (int)(100 - 100.0 * commodity.Price / commodity.originalPrice) + "%", columnRight - 9, picH + 16, StringAlignment.Far);
+                            DrawDiscountNum(g, "-" + (int)(100 - 100.0 * commodity.Price / commodity.originalPrice) + "%", columnRight - 40, picH + 16, StringAlignment.Near);
                         }
                     }
                     else
@@ -343,7 +357,7 @@ namespace WzComparerR2.CharaSimControl
                             int width = TextRenderer.MeasureText(g, info.Substring(0, info.IndexOf("      ")), GearGraphics.ItemDetailFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width;
                             g.DrawLine(Pens.White, columnLeft + 55, picH + 24 + 4, columnLeft + 55 + width + 1, picH + 24 + 4);
                             g.DrawImage(Resource.CSDiscount_arrow, columnLeft + 55 + width + 10, picH + 24 + 1);
-                            DrawDiscountNum(g, "-" + (int)(100 - 100.0 * commodity.Price / commodity.originalPrice) + "%", columnRight - 9, picH + 7, StringAlignment.Far);
+                            DrawDiscountNum(g, "-" + (int)(100 - 100.0 * commodity.Price / commodity.originalPrice) + "%", columnRight - 40, picH + 7, StringAlignment.Near);
                         }
                     }
                     else
@@ -358,6 +372,9 @@ namespace WzComparerR2.CharaSimControl
                 hasLine = true;
             }
 
+            if (picEndH != 0)
+                picH = picEndH;
+
             g.DrawLine(Pens.White, 13, picH, cashBitmap.Width - 8, picH);
             picH += 11;
 
@@ -371,7 +388,7 @@ namespace WzComparerR2.CharaSimControl
                 TextRenderer.DrawText(g, totalOriginalPrice + "캐시     " + totalPrice + "캐시", GearGraphics.ItemDetailFont, new Point(53, picH), Color.White, TextFormatFlags.NoPadding);
                 TextRenderer.DrawText(g, totalOriginalPrice + "캐시", GearGraphics.ItemDetailFont, new Point(53, picH), Color.Red, TextFormatFlags.NoPadding);
                 g.DrawImage(Resource.CSDiscount_arrow, 53 + TextRenderer.MeasureText(g, totalOriginalPrice + "캐시", GearGraphics.ItemDetailFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width + 5, picH + 1);
-                DrawDiscountNum(g, "-" + (int)((100 - 100.0 * totalPrice / totalOriginalPrice)) + "%", cashBitmap.Width - 9, picH - 1, StringAlignment.Far);
+                DrawDiscountNum(g, "-" + (int)((100 - 100.0 * totalPrice / totalOriginalPrice)) + "%", cashBitmap.Width - 40, picH - 1, StringAlignment.Near);
             }
             picH += 11;
 
@@ -383,7 +400,7 @@ namespace WzComparerR2.CharaSimControl
 
         private void DrawDiscountNum(Graphics g, string numString, int x, int y, StringAlignment align)
         {
-            if (g == null || numString == null || align != StringAlignment.Far)
+            if (g == null || numString == null)
                 return;
             bool near = align == StringAlignment.Near;
 

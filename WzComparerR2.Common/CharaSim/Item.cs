@@ -239,7 +239,7 @@ namespace WzComparerR2.CharaSim
                                 {
                                     item.Props.Add(type, Convert.ToInt32(subNode.Value));
                                 }
-                                finally
+                                catch (Exception)
                                 {
                                 }
                             }

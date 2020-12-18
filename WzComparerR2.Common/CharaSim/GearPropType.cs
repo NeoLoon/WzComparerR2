@@ -36,6 +36,7 @@ namespace WzComparerR2.CharaSim
         incSpeed,
         incJump,
         incARC,
+        incAUT,
         incCraft,
         knockback,
         incPVPDamage,

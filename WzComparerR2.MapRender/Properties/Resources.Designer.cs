@@ -493,6 +493,16 @@ namespace WzComparerR2.MapRender.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap UIWindow_img_ToolTip_WorldMap_AuthenticForce {
+            get {
+                object obj = ResourceManager.GetObject("UIWindow_img_ToolTip_WorldMap_AuthenticForce", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap UIWindow_img_ToolTip_WorldMap_enchantMob {
             get {
                 object obj = ResourceManager.GetObject("UIWindow_img_ToolTip_WorldMap_enchantMob", resourceCulture);

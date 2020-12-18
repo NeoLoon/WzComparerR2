@@ -61,6 +61,8 @@
             this.buttonItemSetItems = new DevComponents.DotNetBar.ButtonItem();
             this.itemContainer43 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemClearSetItems = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemClearExclusiveEquips = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemClearCommodities = new DevComponents.DotNetBar.ButtonItem();
             this.itemContainer28 = new DevComponents.DotNetBar.ItemContainer();
             this.itemContainer29 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemCharItem = new DevComponents.DotNetBar.ButtonItem();
@@ -624,7 +626,7 @@
             this.buttonItemSetItems.Name = "buttonItemSetItems";
             this.buttonItemSetItems.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainer43});
-            this.buttonItemSetItems.Text = "세트 아이템";
+            this.buttonItemSetItems.Text = "불러온 정보";
             // 
             // itemContainer43
             // 
@@ -635,7 +637,9 @@
             this.itemContainer43.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemContainer43.Name = "itemContainer43";
             this.itemContainer43.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemClearSetItems});
+            this.buttonItemClearSetItems,
+            this.buttonItemClearExclusiveEquips,
+            this.buttonItemClearCommodities});
             // 
             // 
             // 
@@ -646,6 +650,18 @@
             this.buttonItemClearSetItems.Name = "buttonItemClearSetItems";
             this.buttonItemClearSetItems.Text = "세트 아이템 정리";
             this.buttonItemClearSetItems.Click += new System.EventHandler(this.buttonItemClearSetItems_Click);
+            // 
+            // buttonItemClearExclusiveEquips
+            // 
+            this.buttonItemClearExclusiveEquips.Name = "buttonItemClearExclusiveEquips";
+            this.buttonItemClearExclusiveEquips.Text = "중복 착용 불가 아이템 정리";
+            this.buttonItemClearExclusiveEquips.Click += new System.EventHandler(this.buttonItemClearExclusiveEquips_Click);
+            // 
+            // buttonItemClearCommodities
+            // 
+            this.buttonItemClearCommodities.Name = "buttonItemClearCommodities";
+            this.buttonItemClearCommodities.Text = "캐시 아이템 정리";
+            this.buttonItemClearCommodities.Click += new System.EventHandler(this.buttonItemClearCommodities_Click);
             // 
             // itemContainer28
             // 
@@ -3087,6 +3103,8 @@
         private DevComponents.DotNetBar.ItemContainer itemContainer26;
         private DevComponents.DotNetBar.ButtonItem buttonItemSetItems;
         private DevComponents.DotNetBar.ButtonItem buttonItemClearSetItems;
+        private DevComponents.DotNetBar.ButtonItem buttonItemClearExclusiveEquips;
+        private DevComponents.DotNetBar.ButtonItem buttonItemClearCommodities;
         private DevComponents.DotNetBar.ItemContainer itemContainer27;
         private DevComponents.DotNetBar.ButtonItem buttonItemAutoSave;
         private DevComponents.DotNetBar.ButtonItem buttonItemAutoSaveFolder;

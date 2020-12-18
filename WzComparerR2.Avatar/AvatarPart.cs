@@ -34,9 +34,13 @@ namespace WzComparerR2.Avatar
                 {
                     Icon = BitmapOrigin.CreateFromNode(PluginBase.PluginManager.FindWz(@"Item\Install\0380.img\03801284\info\icon"), PluginBase.PluginManager.FindWz);
                 }
-                if (type == GearType.hair || type == GearType.hair2)
+                if (type == GearType.hair || type == GearType.hair2 || type == GearType.hair3)
                 {
                     Icon = BitmapOrigin.CreateFromNode(PluginBase.PluginManager.FindWz(@"Item\Install\0380.img\03801283\info\icon"), PluginBase.PluginManager.FindWz);
+                }
+                if (type == GearType.head)
+                {
+                    Icon = BitmapOrigin.CreateFromNode(PluginBase.PluginManager.FindWz(@"Item\Install\0380.img\03801577\info\icon"), PluginBase.PluginManager.FindWz);
                 }
             }
 

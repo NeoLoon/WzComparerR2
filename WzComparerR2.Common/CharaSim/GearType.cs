@@ -12,6 +12,7 @@ namespace WzComparerR2.CharaSim
         hair = 3,
         hair2 = 4,
         face2 = 5,
+        hair3 = 6,
 
         /// <summary>
         /// 脸饰 101
@@ -150,6 +151,10 @@ namespace WzComparerR2.CharaSim
         /// 调谐器 1213
         /// </summary>
         tuner = 1213,
+        /// <summary>
+        /// 브레스 슈터 1214
+        /// </summary>
+        breathShooter = 1214,
         /// <summary>
         /// 灵魂手铳 122
         /// </summary>
@@ -358,6 +363,10 @@ namespace WzComparerR2.CharaSim
         /// 手链 135400x
         /// </summary>
         bracelet = 135400,
+        /// <summary>
+        /// 웨폰 벨트 135401x
+        /// </summary>
+        weaponBelt = 135401,
         /// <summary>
         /// 手杖
         /// </summary>

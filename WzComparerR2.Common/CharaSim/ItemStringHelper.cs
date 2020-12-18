@@ -143,6 +143,7 @@ namespace WzComparerR2.CharaSim
                 //case GearPropType.incACC_incEVA: return "명중치 / 회피치：" + sign + value;
 
                 case GearPropType.incARC: return "ARC : " + sign + value;
+                case GearPropType.incAUT: return "AUT : " + sign + value;
                 default: return null;
             }
         }
@@ -170,6 +171,7 @@ namespace WzComparerR2.CharaSim
                     case GearPropType.incSpeed:
                     case GearPropType.incJump:
                     case GearPropType.incARC:
+                    case GearPropType.incAUT:
                         subfix = $"({standardValue} #$+{value - standardValue}#)"; break;
 
                     case GearPropType.bdR:
@@ -344,6 +346,9 @@ namespace WzComparerR2.CharaSim
 
                 case GearType.tuner: return "튜너";
                 case GearType.bracelet: return "브레이슬릿";
+
+                case GearType.breathShooter: return "브레스 슈터";
+                case GearType.weaponBelt: return "웨폰 벨트";
                 default: return null;
             }
         }
@@ -452,6 +457,8 @@ namespace WzComparerR2.CharaSim
 
                 //6xxx
                 case GearType.novaMarrow: return GetExtraJobReqString(61);
+                case GearType.breathShooter:
+                case GearType.weaponBelt: return GetExtraJobReqString(63);
                 case GearType.chain2:
                 case GearType.transmitter: return GetExtraJobReqString(64);
                 case GearType.soulBangle:
@@ -501,6 +508,7 @@ namespace WzComparerR2.CharaSim
                 case 42: return "阴阳师可穿戴装备";
                 case 51: return "미하일 착용 가능";
                 case 61: return "카이저 착용 가능";
+                case 63: return "카인 착용 가능";
                 case 64: return "카데나 착용 가능";
                 case 65: return "엔젤릭 버스터 착용 가능";
                 case 101: return "제로 착용 가능";
@@ -729,10 +737,15 @@ namespace WzComparerR2.CharaSim
                 case 6000: return "카이저";
                 case 6001: return "엔젤릭버스터";
                 case 6002: return "카데나";
+                case 6003: return "카인";
                 case 6100: return "카이저(1차)";
                 case 6110: return "카이저(2차)";
                 case 6111: return "카이저(3차)";
                 case 6112: return "카이저(4차)";
+                case 6300: return "카인(1차)";
+                case 6310: return "카인(2차)";
+                case 6311: return "카인(3차)";
+                case 6312: return "카인(4차)";
                 case 6400: return "카데나(1차)";
                 case 6410: return "카데나(2차)";
                 case 6411: return "카데나(3차)";

@@ -349,6 +349,8 @@ namespace WzComparerR2.CharaSim
                     return GearType.shiningRod;
                 case 1213:
                     return GearType.tuner;
+                case 1214:
+                    return GearType.breathShooter;
             }
             if (code / 10000 == 135)
             {
@@ -357,6 +359,7 @@ namespace WzComparerR2.CharaSim
                     case 13522:
                     case 13528:
                     case 13529:
+                    case 13540:
                         return (GearType)(code / 10);
 
                     default:
@@ -837,10 +840,15 @@ namespace WzComparerR2.CharaSim
                 gear.Icon = BitmapOrigin.CreateFromNode(findNode(@"Item\Install\0380.img\03801284\info\icon"), findNode);
                 gear.IconRaw = BitmapOrigin.CreateFromNode(findNode(@"Item\Install\0380.img\03801284\info\iconRaw"), findNode);
             }
-            if (gear.type == GearType.hair || gear.type == GearType.hair2)
+            if (gear.type == GearType.hair || gear.type == GearType.hair2 || gear.type == GearType.hair3)
             {
                 gear.Icon = BitmapOrigin.CreateFromNode(findNode(@"Item\Install\0380.img\03801283\info\icon"), findNode);
                 gear.IconRaw = BitmapOrigin.CreateFromNode(findNode(@"Item\Install\0380.img\03801283\info\iconRaw"), findNode);
+            }
+            if (gear.type == GearType.head)
+            {
+                gear.Icon = BitmapOrigin.CreateFromNode(findNode(@"Item\Install\0380.img\03801577\info\icon"), findNode);
+                gear.IconRaw = BitmapOrigin.CreateFromNode(findNode(@"Item\Install\0380.img\03801577\info\iconRaw"), findNode);
             }
 
             if (gear.Props.TryGetValue(GearPropType.incCHUC, out value))
