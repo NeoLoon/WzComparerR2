@@ -46,81 +46,81 @@ namespace WzComparerR2.CharaSim
 
             foreach (Wz_Node subNode in commodityNode.Nodes)
             {
+                int value;
+                Int32.TryParse(Convert.ToString(subNode.Value), out value);
                 switch (subNode.Text)
                 {
                     case "SN":
-                        commodity.SN = Convert.ToInt32(subNode.Value);
+                        commodity.SN = value;
                         break;
                     case "ItemId":
-                        commodity.ItemId = Convert.ToInt32(subNode.Value);
+                        commodity.ItemId = value;
                         break;
                     case "Count":
-                        commodity.Count = Convert.ToInt32(subNode.Value);
+                        commodity.Count = value;
                         break;
                     case "Price":
-                        commodity.Price = Convert.ToInt32(subNode.Value);
+                        commodity.Price = value;
                         break;
                     case "Bonus":
-                        commodity.Bonus = Convert.ToInt32(subNode.Value);
+                        commodity.Bonus = value;
                         break;
                     case "Period":
-                        commodity.Period = Convert.ToInt32(subNode.Value);
+                        commodity.Period = value;
                         break;
                     case "Priority":
-                        commodity.Priority = Convert.ToInt32(subNode.Value);
+                        commodity.Priority = value;
                         break;
                     case "ReqPOP":
-                        commodity.ReqPOP = Convert.ToInt32(subNode.Value);
+                        commodity.ReqPOP = value;
                         break;
                     case "ReqLEV":
-                        commodity.ReqLEV = Convert.ToInt32(subNode.Value);
+                        commodity.ReqLEV = value;
                         break;
                     case "Gender":
-                        commodity.Gender = Convert.ToInt32(subNode.Value);
+                        commodity.Gender = value;
                         break;
                     case "OnSale":
-                        commodity.OnSale = Convert.ToInt32(subNode.Value);
+                        commodity.OnSale = value;
                         break;
                     case "Class":
-                        commodity.Class = Convert.ToInt32(subNode.Value);
+                        commodity.Class = value;
                         break;
                     case "Limit":
-                        commodity.Limit = Convert.ToInt32(subNode.Value);
+                        commodity.Limit = value;
                         break;
                     case "gameWorld":
                         commodity.gameWorld = Convert.ToString(subNode.Value);
                         break;
                     case "originalPrice":
-                        commodity.originalPrice = Convert.ToInt32(subNode.Value);
+                        commodity.originalPrice = value;
                         break;
                     case "discount":
-                        commodity.discount = Convert.ToInt32(subNode.Value);
+                        commodity.discount = value;
                         break;
                     case "PbCash":
-                        commodity.PbCash = Convert.ToInt32(subNode.Value);
+                        commodity.PbCash = value;
                         break;
                     case "PbPoint":
-                        commodity.PbPoint = Convert.ToInt32(subNode.Value);
+                        commodity.PbPoint = value;
                         break;
                     case "PbGift":
-                        commodity.PbGift = Convert.ToInt32(subNode.Value);
+                        commodity.PbGift = value;
                         break;
                     case "Refundable":
-                        commodity.Refundable = Convert.ToInt32(subNode.Value);
+                        commodity.Refundable = value;
                         break;
                     case "WebShop":
-                        commodity.WebShop = Convert.ToInt32(subNode.Value);
+                        commodity.WebShop = value;
                         break;
                     case "termStart":
-                        commodity.termStart = Convert.ToInt32(subNode.Value);
+                        commodity.termStart = value;
                         break;
                     case "termEnd":
-                        commodity.termEnd = Convert.ToString(subNode.Value);
-                        int value;
-                        if (Int32.TryParse(commodity.termEnd, out value))
-                        {
+                        if (value != 0)
                             commodity.termEnd = string.Format("{0:D8}/{1:D2}0000", value / 100, value % 100);
-                        }
+                        else
+                            commodity.termEnd = Convert.ToString(subNode.Value);
                         break;
                 }
             }

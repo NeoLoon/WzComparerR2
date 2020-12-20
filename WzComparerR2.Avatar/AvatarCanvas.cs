@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using System.Linq;
 using WzComparerR2.WzLib;
 using WzComparerR2.CharaSim;
 

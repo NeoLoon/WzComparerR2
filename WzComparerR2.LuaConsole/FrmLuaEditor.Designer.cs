@@ -1,4 +1,4 @@
-﻿namespace WzComparerR2.LuaConsole
+namespace WzComparerR2.LuaConsole
 {
     partial class FrmLuaEditor
     {

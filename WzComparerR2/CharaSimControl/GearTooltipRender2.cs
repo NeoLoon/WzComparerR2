@@ -226,6 +226,11 @@ namespace WzComparerR2.CharaSimControl
                 TextRenderer.DrawText(g, "마스터라벨", GearGraphics.EquipDetailFont, new Point(261, picH), ((SolidBrush)GearGraphics.BlueBrush).Color, TextFormatFlags.HorizontalCenter);
                 picH += 15;
             }
+            else if (Gear.Props.TryGetValue(GearPropType.BTSLabel, out value) && value > 0)
+            {
+                TextRenderer.DrawText(g, "BTS 라벨", GearGraphics.EquipDetailFont, new Point(261, picH), Color.FromArgb(187, 102, 238), TextFormatFlags.HorizontalCenter);
+                picH += 15;
+            }
 
             //额外属性
             var attrList = GetGearAttributeString();
@@ -323,6 +328,7 @@ namespace WzComparerR2.CharaSimControl
             if (Gear.Cash) //绘制cash标识
             {
                 Bitmap cashImg = null;
+                Point cashOrigin = new Point(12, 12);
 
                 if (Gear.Props.TryGetValue(GearPropType.royalSpecial, out value) && value > 0)
                 {
@@ -333,14 +339,19 @@ namespace WzComparerR2.CharaSimControl
                 {
                     cashImg = Resource.CashShop_img_CashItem_label_3;
                 }
+                else if (Gear.Props.TryGetValue(GearPropType.BTSLabel, out value) && value > 0)
+                {
+                    cashImg = Resource.CashShop_img_CashItem_label_10;
+                    cashOrigin = new Point(cashImg.Width, cashImg.Height);
+                }
                 if (cashImg == null) //default cashImg
                 {
                     cashImg = Resource.CashItem_0;
                 }
 
                 g.DrawImage(GearGraphics.EnlargeBitmap(cashImg),
-                    18 + 68 - 26,
-                    picH + 15 + 68 - 26);
+                    18 + 68 - cashOrigin.X * 2 - 2,
+                    picH + 15 + 68 - cashOrigin.Y * 2 - 2);
             }
             //检查星岩
             bool hasSocket = Gear.GetBooleanValue(GearPropType.nActivatedSocket);

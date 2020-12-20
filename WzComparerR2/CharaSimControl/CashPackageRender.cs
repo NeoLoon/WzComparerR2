@@ -64,12 +64,8 @@ namespace WzComparerR2.CharaSimControl
             if (CharaSimLoader.LoadedCommoditiesByItemId.ContainsKey(CashPackage.ItemID))
                 commodityPackage = CharaSimLoader.LoadedCommoditiesByItemId[CashPackage.ItemID];
 
-            SizeF titleSize = TextRenderer.MeasureText(g, CashPackage.name, GearGraphics.ItemNameFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPrefix);
-            titleSize.Width += 12 * 2;
-
-            if (titleSize.Width < 220)
-                titleSize.Width = 220;
-            titleSize.Height = 220;
+            int fullWidth = Math.Max(220, TextRenderer.MeasureText(g, CashPackage.name, GearGraphics.ItemNameFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPrefix).Width + 12 * 2);
+            int[] columnWidth = { CashPackage.SN.Count < 8 ? fullWidth : 220, 220, 220 };
 
             for (int i = 0; i < CashPackage.SN.Count; ++i)
             {
@@ -97,46 +93,53 @@ namespace WzComparerR2.CharaSimControl
                     name = "(null)";
                 }
 
-                SizeF nameSize = TextRenderer.MeasureText(g, name.Replace(Environment.NewLine, ""), GearGraphics.ItemDetailFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
+                int nameWidth = TextRenderer.MeasureText(g, name.Replace(Environment.NewLine, ""), GearGraphics.ItemDetailFont, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix).Width;
                 if (commodity.Bonus == 0)
                 {
                     if (commodity.originalPrice > 0 && commodity.Price < commodity.originalPrice)
-                        nameSize.Width += 55 + 31 + 6 + 8;
+                        nameWidth += 55 + 31 + 6 + 8;
                     else
-                        nameSize.Width += 55 + 8;
+                        nameWidth += 55 + 8;
                 }
                 else
-                    nameSize.Width += 55 + 38 + 6 + 8;
+                    nameWidth += 55 + 38 + 6 + 8;
+
                 if (CashPackage.SN.Count < 8)
                 {
-                    if (nameSize.Width > titleSize.Width)
-                        titleSize.Width = nameSize.Width;
+                    columnWidth[0] = Math.Max(columnWidth[0], nameWidth);
+                }
+                else if (CashPackage.SN.Count < 27)
+                {
+                    if (i < (CashPackage.SN.Count + 1) / 2)
+                        columnWidth[0] = Math.Max(columnWidth[0], nameWidth);
+                    else
+                        columnWidth[1] = Math.Max(columnWidth[1], nameWidth);
                 }
                 else
                 {
-                    if (i < CashPackage.SN.Count / 2)
-                    {
-                        if (nameSize.Width > titleSize.Height)
-                            titleSize.Height = nameSize.Width;
-                    }
+                    if (i < (CashPackage.SN.Count + 2) / 3)
+                        columnWidth[0] = Math.Max(columnWidth[0], nameWidth);
+                    else if (i < (2 * CashPackage.SN.Count + 2) / 3)
+                        columnWidth[1] = Math.Max(columnWidth[1], nameWidth);
                     else
-                    {
-                        if (nameSize.Width > titleSize.Width)
-                            titleSize.Width = nameSize.Width;
-                    }
+                        columnWidth[2] = Math.Max(columnWidth[2], nameWidth);
                 }
             }
 
-            if (CashPackage.SN.Count >= 8)
-                titleSize.Width += titleSize.Height - 4;
+            if (CashPackage.SN.Count < 8)
+                fullWidth = Math.Max(fullWidth, columnWidth[0]);
+            else if (CashPackage.SN.Count < 27)
+                fullWidth = Math.Max(fullWidth, columnWidth[0] + columnWidth[1] - 4);
+            else
+                fullWidth = Math.Max(fullWidth, columnWidth[0] + columnWidth[1] + columnWidth[2] - 8);
 
-            if (titleSize.Width > 220)
+            if (fullWidth > 220)
             {
                 //重构大小
                 g.Dispose();
                 cashBitmap.Dispose();
 
-                cashBitmap = new Bitmap((int)Math.Ceiling(titleSize.Width), DefaultPicHeight);
+                cashBitmap = new Bitmap(fullWidth, DefaultPicHeight);
                 g = Graphics.FromImage(cashBitmap);
             }
 
@@ -203,21 +206,39 @@ namespace WzComparerR2.CharaSimControl
             bool hasLine = false;
             picH -= 4;
 
-            int picStartH = picH, picEndH = 0, columnLeft = 0, columnRight;
-            if (CashPackage.SN.Count < 8)
-                columnRight = cashBitmap.Width;
-            else
-                columnRight = (int)Math.Ceiling(titleSize.Height);
+            int picStartH = picH, picEndH = 0, columnLeft = 0, columnRight = columnWidth[0];
 
             for (int i = 0; i < CashPackage.SN.Count; ++i)
             {
-                if (CashPackage.SN.Count >= 8 && i == (CashPackage.SN.Count + 1) / 2)
+                if (CashPackage.SN.Count >= 8 && CashPackage.SN.Count < 27)
                 {
-                    hasLine = false;
-                    picEndH = picH;
-                    picH = picStartH;
-                    columnLeft = (int)Math.Ceiling(titleSize.Height) - 2;
-                    columnRight = cashBitmap.Width;
+                    if (i == (CashPackage.SN.Count + 1) / 2)
+                    {
+                        hasLine = false;
+                        picEndH = picH;
+                        picH = picStartH;
+                        columnLeft = columnWidth[0] - 2;
+                        columnRight = columnWidth[0] + columnWidth[1] - 4;
+                    }
+                }
+                else if (CashPackage.SN.Count >= 27)
+                {
+                    if (i == (CashPackage.SN.Count + 2) / 3)
+                    {
+                        hasLine = false;
+                        picEndH = picH;
+                        picH = picStartH;
+                        columnLeft = columnWidth[0] - 2;
+                        columnRight = columnWidth[0] + columnWidth[1] - 4;
+                    }
+                    else if (i == (2 * CashPackage.SN.Count + 2) / 3)
+                    {
+                        hasLine = false;
+                        picEndH = picH;
+                        picH = picStartH;
+                        columnLeft = columnWidth[0] + columnWidth[1] - 6;
+                        columnRight = columnWidth[0] + columnWidth[1] + columnWidth[2] - 8;
+                    }
                 }
 
                 if (hasLine)

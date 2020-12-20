@@ -178,6 +178,7 @@ namespace WzComparerR2.CharaSim
         cantRepair,
         colorvar,
         noPetEquipStatMoveItem,
+        BTSLabel,
 
         gatherTool_incSkillLevel = 2000,
         gatherTool_incSpeed,
