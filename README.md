@@ -38,5 +38,6 @@ links: [\[更新日志\]](https://github.com/Kagamia/WzComparerR2/tree/master/Up
 - [Spine-Runtime](https://github.com/EsotericSoftware/spine-runtimes)
 - [EmptyKeysUI](https://github.com/EmptyKeys)
 - **[@KENNYSOFT](https://github.com/KENNYSOFT)** and his WcR2-KMS version.
+- **[@NeoLoon](https://github.com/NeoLoon)** and his WcR2-KMS-EN version.
 - **[@Spadow](https://github.com/Sunaries)** and his WcR2-GMS version.
 - All testers from CMST tester group.
