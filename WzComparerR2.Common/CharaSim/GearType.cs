@@ -288,6 +288,10 @@ namespace WzComparerR2.CharaSim
         /// </summary>
         boxingClaw = 135282,
         /// <summary>
+        /// 拳天 135_86
+        /// </summary>
+        boxingSky = 135286,
+        /// <summary>
         /// 手腕护带 135_90
         /// </summary>
         viperWristband = 135290,
@@ -298,7 +302,7 @@ namespace WzComparerR2.CharaSim
         /// <summary>
         /// 火药桶 135_92
         /// </summary>
-        cannonGunPowder = 135292,
+        connonGunPowder = 135292,
         /// <summary>
         /// 砝码 135_93
         /// </summary>
@@ -322,7 +326,7 @@ namespace WzComparerR2.CharaSim
         /// <summary>
         /// 火药桶 135_98
         /// </summary>
-        cannonGunPowder2 = 135298,
+        connonGunPowder2 = 135298,
         /// <summary>
         /// 控制器 135300
         /// </summary>
@@ -387,6 +391,10 @@ namespace WzComparerR2.CharaSim
         /// 双手剑 140
         /// </summary>
         thSword = 140,
+        /// <summary>
+        /// 拳炮 140_3xxx
+        /// </summary>
+        boxingCannon = 1403,
         /// <summary>
         /// 双手斧 141
         /// </summary>

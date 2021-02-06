@@ -219,8 +219,9 @@ namespace WzComparerR2.CharaSimControl
                         Brush brush = setItemPart.Value.Enabled ? Brushes.White : GearGraphics.GrayBrush2;
                         if (!cash)
                         {
-                            TextRenderer.DrawText(g, itemName, GearGraphics.EquipDetailFont2, new Point(10, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
-                            TextRenderer.DrawText(g, typeName, GearGraphics.EquipDetailFont2, new Point(261 - 10 - TextRenderer.MeasureText(g, typeName, GearGraphics.EquipDetailFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
+                            int typeWidth = TextRenderer.MeasureText(g, typeName, GearGraphics.EquipDetailFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width;
+                            TextRenderer.DrawText(g, typeName, GearGraphics.EquipDetailFont2, new Point(261 - 10 - typeWidth, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
+                            TextRenderer.DrawText(g, Compact(g, itemName, 261 - 10 - typeWidth - 10), GearGraphics.EquipDetailFont2, new Point(10, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
                             picHeight += 18;
                         }
                         else
@@ -233,8 +234,9 @@ namespace WzComparerR2.CharaSimControl
                                 g.DrawImage(icon.Bitmap, 10 + 2 - icon.Origin.X, picHeight + 2 + 32 - icon.Origin.Y);
                             }
                             g.DrawImage(Resource.CashItem_0, 10 + 2 + 20, picHeight + 2 + 32 - 12);
-                            TextRenderer.DrawText(g, itemName, GearGraphics.EquipDetailFont2, new Point(52, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
-                            TextRenderer.DrawText(g, typeName, GearGraphics.EquipDetailFont2, new Point(261 - 10 - TextRenderer.MeasureText(g, typeName, GearGraphics.EquipDetailFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
+                            int typeWidth = TextRenderer.MeasureText(g, typeName, GearGraphics.EquipDetailFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding).Width;
+                            TextRenderer.DrawText(g, typeName, GearGraphics.EquipDetailFont2, new Point(261 - 10 - typeWidth, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
+                            TextRenderer.DrawText(g, Compact(g, itemName, 261 - 10 - typeWidth - 52), GearGraphics.EquipDetailFont2, new Point(52, picHeight), ((SolidBrush)brush).Color, TextFormatFlags.NoPadding);
                             if (setItemPart.Value.ByGender)
                             {
                                 picHeight += 18;
@@ -295,6 +297,47 @@ namespace WzComparerR2.CharaSimControl
             format.Dispose();
             g.Dispose();
             return setBitmap;
+        }
+
+        private static string Compact(Graphics g, string text, int width) // https://www.codeproject.com/Articles/37503/Auto-Ellipsis
+        {
+            Size s = TextRenderer.MeasureText(g, text, GearGraphics.EquipDetailFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+
+            // control is large enough to display the whole text 
+            if (s.Width <= width)
+                return text;
+
+            int len = 0;
+            int seg = text.Length;
+            string fit = "";
+
+            // find the longest string that fits into
+            // the control boundaries using bisection method 
+            while (seg > 1)
+            {
+                seg -= seg / 2;
+
+                int left = len + seg;
+
+                if (left > text.Length)
+                    continue;
+
+                // build and measure a candidate string with ellipsis
+                string tst = text.Substring(0, left) + "..";
+
+                s = TextRenderer.MeasureText(g, tst, GearGraphics.EquipDetailFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPadding);
+
+                // candidate string fits into control boundaries, 
+                // try a longer string
+                // stop when seg <= 1 
+                if (s.Width <= width)
+                {
+                    len += seg;
+                    fit = tst;
+                }
+            }   
+
+            return fit;
         }
 
         private Bitmap RenderEffectPart(bool specialPetSetEffectName, out int picHeight)

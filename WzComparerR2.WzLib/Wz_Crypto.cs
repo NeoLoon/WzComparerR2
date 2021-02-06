@@ -155,7 +155,7 @@ namespace WzComparerR2.WzLib
             f.FileStream.Position = old_off;
         }
 
-        private bool IsLegalNodeName(string nodeName)
+        public bool IsLegalNodeName(string nodeName)
         {
             return nodeName.EndsWith(".img") || Regex.IsMatch(nodeName, @"^[A-Za-z-9_]+$");
         }

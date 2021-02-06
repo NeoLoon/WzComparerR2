@@ -293,10 +293,32 @@ namespace WzComparerR2.WzLib
                 switch ((int)this.BReader.ReadByte())
                 {
                     case 0x02:
-                        name = this.ReadStringAt(this.Header.HeaderSize + 1 + this.BReader.ReadInt32());
+                        foreach (Wz_Crypto.Wz_CryptoKeyType encType in new[] { Wz_Crypto.Wz_CryptoKeyType.BMS, Wz_Crypto.Wz_CryptoKeyType.KMS, Wz_Crypto.Wz_CryptoKeyType.GMS, this.WzStructure.encryption.EncType })
+                        {
+                            long oldoffset = this.FileStream.Position;
+                            int stroffset = this.Header.HeaderSize + 1 + this.BReader.ReadInt32();
+                            name = this.ReadStringAt(stroffset);
+                            if (this.WzStructure.encryption.IsLegalNodeName(name))
+                            {
+                                break;
+                            }
+                            this.FileStream.Position = oldoffset;
+                            stringTable.Remove(stroffset);
+                            this.WzStructure.encryption.EncType = encType;
+                        }
                         goto case 0xffff;
                     case 0x04:
-                        name = this.ReadString();
+                        foreach (Wz_Crypto.Wz_CryptoKeyType encType in new[] { Wz_Crypto.Wz_CryptoKeyType.BMS, Wz_Crypto.Wz_CryptoKeyType.KMS, Wz_Crypto.Wz_CryptoKeyType.GMS, this.WzStructure.encryption.EncType })
+                        {
+                            long oldoffset = this.FileStream.Position;
+                            name = this.ReadString();
+                            if (this.WzStructure.encryption.IsLegalNodeName(name))
+                            {
+                                break;
+                            }
+                            this.FileStream.Position = oldoffset;
+                            this.WzStructure.encryption.EncType = encType;
+                        }
                         goto case 0xffff;
 
                     case 0xffff:

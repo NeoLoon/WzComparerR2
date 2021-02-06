@@ -119,7 +119,7 @@ namespace WzComparerR2.Text
                                 }
                             }
                             len = (i--) - start;
-                            runs.Add(new Run(start, len) { IsWhiteSpace = true });
+                            runs.Add(new Run(start, len) { IsWhiteSpace = true, ColorID = run.ColorID });
                             break;
 
                         case '\r':
@@ -249,8 +249,21 @@ namespace WzComparerR2.Text
                                     }
                                     run = runs[r];
                                 }
+                                if (run.ColorID == colorID && run.ColorID == "" && run.Length == 1 && this.sb[run.StartIndex] == ' ')
+                                {
+                                    end = run.StartIndex + run.Length;
+                                    if (++r >= runs.Count)
+                                    {
+                                        break;
+                                    }
+                                    run = runs[r];
+                                }
                                 flush(true);
-                                start = run.StartIndex;
+                                if (r < runs.Count)
+                                {
+                                    start = run.StartIndex;
+                                    colorID = run.ColorID;
+                                }
                                 xOffset = run.X;
                             }
                             if (width - curX < run.Width)

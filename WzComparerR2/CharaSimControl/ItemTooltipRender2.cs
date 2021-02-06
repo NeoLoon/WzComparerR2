@@ -356,6 +356,11 @@ namespace WzComparerR2.CharaSimControl
                 }
                 picH += 15;
             }
+            else if (Item.Props.TryGetValue(ItemPropType.BTSLabel, out value) && value > 0)
+            {
+                TextRenderer.DrawText(g, "BTS 라벨", GearGraphics.EquipDetailFont, new Point(tooltip.Width, picH), Color.FromArgb(187, 102, 238), TextFormatFlags.HorizontalCenter);
+                picH += 15;
+            }
 
             //额外特性
             var attrList = GetItemAttributeString();
@@ -412,6 +417,7 @@ namespace WzComparerR2.CharaSimControl
             }
             else if ((item.Props.TryGetValue(ItemPropType.permanent, out value) && value != 0) || (item.ItemID / 10000 == 500 && item.Props.TryGetValue(ItemPropType.life, out value) && value == 0))
             {
+                picH -= 3;
                 if (value == 0)
                 {
                     value = 1;
@@ -420,16 +426,21 @@ namespace WzComparerR2.CharaSimControl
             }
             else if (item.ItemID / 10000 == 500 && item.Props.TryGetValue(ItemPropType.limitedLife, out value) && value > 0)
             {
+                picH -= 3;
                 expireTime = string.Format("마법의 시간: {0}시간 {1}분", value / 3600, (value % 3600) / 60);
             }
             else if (item.ItemID / 10000 == 500 && item.Props.TryGetValue(ItemPropType.life, out value) && value > 0)
             {
+                picH -= 3;
                 DateTime time = DateTime.Now.AddDays(value);
                 expireTime = time.ToString("마법의 시간: yyyy년 M월 d일 HH시까지");
             }
             if (!string.IsNullOrEmpty(expireTime))
             {
-                picH += 3;
+                if (attrList.Count > 0)
+                {
+                    picH += 3;
+                }
                 //g.DrawString(expireTime, GearGraphics.ItemDetailFont, Brushes.White, tooltip.Width / 2, picH, format);
                 foreach (string expireTimeLine in expireTime.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
                 {
@@ -461,11 +472,17 @@ namespace WzComparerR2.CharaSimControl
             if (item.Cash)
             {
                 Bitmap cashImg = null;
+                Point cashOrigin = new Point(12, 12);
 
                 if (item.Props.TryGetValue(ItemPropType.wonderGrade, out value) && value > 0)
                 {
                     string resKey = $"CashShop_img_CashItem_label_{value + 3}";
                     cashImg = Resource.ResourceManager.GetObject(resKey) as Bitmap;
+                }
+                else if (Item.Props.TryGetValue(ItemPropType.BTSLabel, out value) && value > 0)
+                {
+                    cashImg = Resource.CashShop_img_CashItem_label_10;
+                    cashOrigin = new Point(cashImg.Width, cashImg.Height);
                 }
                 if (cashImg == null) //default cashImg
                 {
@@ -473,8 +490,8 @@ namespace WzComparerR2.CharaSimControl
                 }
 
                 g.DrawImage(GearGraphics.EnlargeBitmap(cashImg),
-                    iconX + 6 + 68 - 26,
-                    picH + 6 + 68 - 26);
+                    iconX + 6 + 68 - cashOrigin.X * 2 - 2,
+                    picH + 6 + 68 - cashOrigin.Y * 2 - 2);
             }
             g.DrawImage(Resource.UIToolTip_img_Item_ItemIcon_new, iconX + 7, picH + 7);
             g.DrawImage(Resource.UIToolTip_img_Item_ItemIcon_cover, iconX + 4, picH + 4); //绘制左上角cover

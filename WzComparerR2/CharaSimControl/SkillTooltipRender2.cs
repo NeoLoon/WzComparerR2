@@ -27,7 +27,8 @@ namespace WzComparerR2.CharaSimControl
         public bool ShowProperties { get; set; } = true;
         public bool ShowDelay { get; set; }
         public bool ShowReqSkill { get; set; } = true;
-
+        public bool DisplayCooltimeMSAsSec { get; set; } = true;
+        public bool DisplayPermyriadAsPercent { get; set; } = true;
 
         public override Bitmap Render()
         {
@@ -138,7 +139,11 @@ namespace WzComparerR2.CharaSimControl
 
             if (Skill.Level > 0)
             {
-                string hStr = SummaryParser.GetSkillSummary(Skill, Skill.Level, sr, SummaryParams.Default);
+                string hStr = SummaryParser.GetSkillSummary(Skill, Skill.Level, sr, SummaryParams.Default, new SkillSummaryOptions
+                {
+                    ConvertCooltimeMS = this.DisplayCooltimeMSAsSec,
+                    ConvertPerM = this.DisplayPermyriadAsPercent
+                });
                 GearGraphics.DrawString(g, "[현재레벨 " + Skill.Level + "]", GearGraphics.ItemDetailFont, 10, 412, ref picH, 16);
                 if (Skill.SkillID / 10000 / 1000 == 10 && Skill.Level == 1 && Skill.ReqLevel > 0)
                 {
@@ -152,7 +157,11 @@ namespace WzComparerR2.CharaSimControl
 
             if (Skill.Level < Skill.MaxLevel && !Skill.DisableNextLevelInfo)
             {
-                string hStr = SummaryParser.GetSkillSummary(Skill, Skill.Level + 1, sr, SummaryParams.Default);
+                string hStr = SummaryParser.GetSkillSummary(Skill, Skill.Level + 1, sr, SummaryParams.Default, new SkillSummaryOptions
+                {
+                    ConvertCooltimeMS = this.DisplayCooltimeMSAsSec,
+                    ConvertPerM = this.DisplayPermyriadAsPercent
+                });
                 GearGraphics.DrawString(g, "[다음레벨 " + (Skill.Level + 1) + "]", GearGraphics.ItemDetailFont, 10, 412, ref picH, 16);
                 if (Skill.SkillID / 10000 / 1000 == 10 && (Skill.Level + 1) == 1 && Skill.ReqLevel > 0)
                 {

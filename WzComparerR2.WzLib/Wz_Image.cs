@@ -16,15 +16,14 @@ namespace WzComparerR2.WzLib
             this.HashedOffset = hashOff;
             this.HashedOffsetPosition = hashPos;
             this.Node = new Wz_ImageNode(name, this);
+            this.Encryption = null;
 
             this.extr = false;
             this.chec = false;
-            this.checEnc = false;
         }
 
         private bool extr;
         private bool chec;
-        private bool checEnc;
 
         public string Name { get; set; }
         public Wz_File WzFile { get; set; }
@@ -37,6 +36,8 @@ namespace WzComparerR2.WzLib
         public Wz_Node Node { get; private set; }
 
         public Wz_Node OwnerNode { get; set; }
+
+        public Wz_Crypto Encryption { get; private set; }
 
         public bool IsChecksumChecked
         {
@@ -68,7 +69,7 @@ namespace WzComparerR2.WzLib
                     }
                     this.chec = true;
                 }
-                if (!this.checEnc)
+                if (this.Encryption == null)
                 {
                     if (!this.IsLuaImage)
                     {
@@ -186,7 +187,7 @@ namespace WzComparerR2.WzLib
                     int form = this.WzFile.ReadInt32() + this.WzFile.BReader.ReadByte();
                     this.WzFile.FileStream.Position += 4;
                     int bufsize = this.WzFile.BReader.ReadInt32();
-                    parent.Value = new Wz_Png(w, h, bufsize - 1, form, (int)this.WzFile.FileStream.Position + 1, this.WzFile);
+                    parent.Value = new Wz_Png(w, h, bufsize - 1, form, (int)this.WzFile.FileStream.Position + 1, this);
                     this.WzFile.FileStream.Position += bufsize;
                     break;
 
@@ -204,7 +205,7 @@ namespace WzComparerR2.WzLib
                     int ms = this.WzFile.ReadInt32();
                     int headerLen = eob - len - (int)this.WzFile.FileStream.Position;
                     byte[] header = this.WzFile.BReader.ReadBytes(headerLen);
-                    parent.Value = new Wz_Sound(eob - len, len, header, ms, this.WzFile);
+                    parent.Value = new Wz_Sound(eob - len, len, header, ms, this);
                     this.WzFile.FileStream.Position = eob;
                     break;
 
@@ -226,7 +227,7 @@ namespace WzComparerR2.WzLib
             {
                 if (IsIllegalTag())
                 {
-                    this.checEnc = true;
+                    this.Encryption = new Wz_Crypto() { EncType = crypto.EncType };
                     return;
                 }
             }
@@ -234,21 +235,21 @@ namespace WzComparerR2.WzLib
             crypto.EncType = Wz_Crypto.Wz_CryptoKeyType.KMS;
             if (IsIllegalTag())
             {
-                this.checEnc = true;
+                this.Encryption = new Wz_Crypto() { EncType = crypto.EncType };
                 return;
             }
 
             crypto.EncType = Wz_Crypto.Wz_CryptoKeyType.GMS;
             if (IsIllegalTag())
             {
-                this.checEnc = true;
+                this.Encryption = new Wz_Crypto() { EncType = crypto.EncType };
                 return;
             }
 
             crypto.EncType = Wz_Crypto.Wz_CryptoKeyType.BMS;
             if (IsIllegalTag())
             {
-                this.checEnc = true;
+                this.Encryption = new Wz_Crypto() { EncType = crypto.EncType };
                 return;
             }
 
@@ -342,11 +343,11 @@ namespace WzComparerR2.WzLib
         {
             int len = this.WzFile.ReadInt32();
             byte[] data = this.WzFile.BReader.ReadBytes(len);
-            if (!this.checEnc)
+            if (this.Encryption == null)
             {
                 TryDetectLuaEnc(data);
             }
-            this.WzFile.WzStructure.encryption.keys.Decrypt(data, 0, data.Length);
+            this.Encryption.keys.Decrypt(data, 0, data.Length);
             string luaCode = Encoding.UTF8.GetString(data);
             parent.Value = luaCode;
         }
@@ -381,7 +382,7 @@ namespace WzComparerR2.WzLib
             }
 
             crypto.EncType = maxCharEnc;
-            this.checEnc = true;
+            this.Encryption = new Wz_Crypto() { EncType = crypto.EncType };
         }
         
         internal class Wz_ImageNode : Wz_Node

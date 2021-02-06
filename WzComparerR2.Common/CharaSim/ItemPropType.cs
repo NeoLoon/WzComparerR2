@@ -50,5 +50,6 @@ namespace WzComparerR2.CharaSim
         useTradeBlock,
         level,
         sharableOnce,
+        BTSLabel,
     }
 }
