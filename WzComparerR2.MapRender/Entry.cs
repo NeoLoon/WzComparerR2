@@ -41,7 +41,7 @@ namespace WzComparerR2.MapRender
             bar.Items.Add(btnItemMapRender);
             #endif
             this.bar2 = Context.AddRibbonBar("Modules", "MapRender2");
-            btnItemMapRenderV2 = new ButtonItem("", "맵 미리보기 V2");
+            btnItemMapRenderV2 = new ButtonItem("", "Preview Map V2");
             btnItemMapRenderV2.Click += btnItem_Click;
             bar2.Items.Add(btnItemMapRenderV2);
             ConfigManager.RegisterAllSection();
@@ -59,7 +59,7 @@ namespace WzComparerR2.MapRender
                 {
                     if (wzFile == null || wzFile.Type != Wz_Type.Map)
                     {
-                        if (MessageBoxEx.Show("Map.wz의 맵 img를 선택하지 않으셨습니다. 계속 진행하시겠습니까?", "경고", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                        if (MessageBoxEx.Show("You didn't select Map img from Map.wz, Continue?", "Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
                         {
                             goto exit;
                         }
@@ -136,7 +136,7 @@ namespace WzComparerR2.MapRender
                 }
             }
 
-            MessageBoxEx.Show("Map.wz에서 맵 img를 선택하세요.", "오류");
+            MessageBoxEx.Show("Please select Map img from Map.wz.", "Error");
 
             exit:
             return;

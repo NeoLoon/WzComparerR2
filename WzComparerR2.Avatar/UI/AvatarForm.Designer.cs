@@ -169,7 +169,7 @@
             this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bar1.TabIndex = 0;
             this.bar1.TabStop = false;
-            this.bar1.Text = "패널";
+            this.bar1.Text = "Panel";
             // 
             // panelDockContainer1
             // 
@@ -209,7 +209,7 @@
             // 
             this.dockContainerItem1.Control = this.panelDockContainer1;
             this.dockContainerItem1.Name = "dockContainerItem1";
-            this.dockContainerItem1.Text = "패널";
+            this.dockContainerItem1.Text = "Panel";
             // 
             // bar2
             // 
@@ -232,7 +232,7 @@
             this.bar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bar2.TabIndex = 1;
             this.bar2.TabStop = false;
-            this.bar2.Text = "동작";
+            this.bar2.Text = "Action";
             // 
             // panelDockContainer2
             // 
@@ -309,7 +309,7 @@
             this.labelX4.Size = new System.Drawing.Size(31, 18);
             this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX4.TabIndex = 13;
-            this.labelX4.Text = "무기";
+            this.labelX4.Text = "Weapon";
             // 
             // chkTamingPlay
             // 
@@ -510,7 +510,7 @@
             this.chkHairShade.Size = new System.Drawing.Size(85, 19);
             this.chkHairShade.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkHairShade.TabIndex = 10;
-            this.chkHairShade.Text = "머리그림자";
+            this.chkHairShade.Text = "Hair Shadow";
             this.chkHairShade.CheckedChanged += new System.EventHandler(this.chkHairShade_CheckedChanged);
             // 
             // chkHairCover
@@ -600,7 +600,7 @@
             this.bar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bar3.TabIndex = 0;
             this.bar3.TabStop = false;
-            this.bar3.Text = "도구";
+            this.bar3.Text = "Tools";
             // 
             // btnCode
             // 
@@ -617,25 +617,25 @@
             this.btnCharac.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnMale,
             this.btnFemale});
-            this.btnCharac.Tooltip = "기본설정";
+            this.btnCharac.Tooltip = "Load Default";
             // 
             // btnMale
             // 
             this.btnMale.Name = "btnMale";
-            this.btnMale.Text = "남자기본";
+            this.btnMale.Text = "Default Male";
             this.btnMale.Click += new System.EventHandler(this.btnMale_Click);
             // 
             // btnFemale
             // 
             this.btnFemale.Name = "btnFemale";
-            this.btnFemale.Text = "여자기본";
+            this.btnFemale.Text = "Default Female";
             this.btnFemale.Click += new System.EventHandler(this.btnFemale_Click);
             // 
             // btnReset
             // 
             this.btnReset.Image = global::WzComparerR2.Avatar.Properties.Resources.arrow_in;
             this.btnReset.Name = "btnReset";
-            this.btnReset.Tooltip = "원래위치로";
+            this.btnReset.Tooltip = "Reset";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnLock
@@ -643,7 +643,7 @@
             this.btnLock.AutoCheckOnClick = true;
             this.btnLock.Image = global::WzComparerR2.Avatar.Properties.Resources._lock;
             this.btnLock.Name = "btnLock";
-            this.btnLock.Tooltip = "잠금";
+            this.btnLock.Tooltip = "Lock";
             // 
             // buttonItem1
             // 
@@ -690,7 +690,7 @@
             this.labelX5.Size = new System.Drawing.Size(25, 16);
             this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX5.TabIndex = 14;
-            this.labelX5.Text = "귀";
+            this.labelX5.Text = "Ear";
             // 
             // cmbEar
             // 
@@ -710,14 +710,14 @@
             // 
             this.btnSave.Name = "btnSave";
             this.btnSave.Image = global::WzComparerR2.Avatar.Properties.Resources.save;
-            this.btnSave.Tooltip = "저장";
+            this.btnSave.Tooltip = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             //
             // btnExport
             //
             this.btnExport.Name = "btnExport";
             this.btnExport.Image = global::WzComparerR2.Avatar.Properties.Resources.export;
-            this.btnExport.Tooltip = "동작 내보내기";
+            this.btnExport.Tooltip = "Export";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // AvatarForm
@@ -734,7 +734,7 @@
             this.Controls.Add(this.dockSite8);
             this.DoubleBuffered = true;
             this.Name = "AvatarForm";
-            this.Text = "아바타";
+            this.Text = "Avatar";
             this.dockSite2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             this.bar1.ResumeLayout(false);

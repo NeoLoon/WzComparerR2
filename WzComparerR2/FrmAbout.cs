@@ -45,10 +45,11 @@ namespace WzComparerR2
         {
             this.advTree1.Nodes.Clear();
 
-            this.advTree1.Nodes.Add(new Node("KMS <font color=\"#808080\">v3.4.0</font>"));
+            this.advTree1.Nodes.Add(new Node("KMS <font color=\"#808080\">v3.4.0N</font>"));
 
             foreach (var contribution in new[]
             {
+                new Tuple<string, string>("[KMS] English translation", "Neo"),
                 new Tuple<string, string>("[KMS] 각종 기능 추가, 최종 번역", "박현민"),
                 new Tuple<string, string>("[KMS] 문구 번역", "슈린냥"),
                 new Tuple<string, string>("[KMS] 문구 오류 제보", "인소야닷컴 실버"),

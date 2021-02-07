@@ -20,7 +20,7 @@ namespace WzComparerR2
 
             cmbWzEncoding.Items.AddRange(new[]
             {
-                new ComboItem("기본"){ Value = 0 },
+                new ComboItem("Default"){ Value = 0 },
                 new ComboItem("Shift-JIS (JMS)"){ Value = 932 },
                 new ComboItem("GB2312 (CMS)"){ Value = 936 },
                 new ComboItem("EUC-KR (KMS)"){ Value = 949 },

@@ -28,6 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo11 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo2 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo3 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo4 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo5 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo6 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo12 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo8 = new DevComponents.DotNetBar.SuperTooltipInfo();
+            DevComponents.DotNetBar.SuperTooltipInfo superTooltipInfo10 = new DevComponents.DotNetBar.SuperTooltipInfo();
             this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.integerInput1 = new DevComponents.Editors.IntegerInput();
             this.integerInput2 = new DevComponents.Editors.IntegerInput();
@@ -44,6 +53,7 @@
             this.expandablePanel1 = new DevComponents.DotNetBar.ExpandablePanel();
             this.buttonXCheck = new DevComponents.DotNetBar.ButtonX();
             this.expandablePanel2 = new DevComponents.DotNetBar.ExpandablePanel();
+            this.chkResolvePngLink = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.chkOutputRemovedImg = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.chkOutputAddedImg = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cmbComparePng = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -80,7 +90,6 @@
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.superTooltip1 = new DevComponents.DotNetBar.SuperTooltip();
-            this.chkResolvePngLink = new DevComponents.DotNetBar.Controls.CheckBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             this.expandablePanel1.SuspendLayout();
@@ -101,6 +110,7 @@
             this.comboBoxEx1.DisplayMember = "Text";
             this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxEx1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEx1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxEx1.FormattingEnabled = true;
             this.comboBoxEx1.ItemHeight = 15;
             this.comboBoxEx1.Location = new System.Drawing.Point(12, 35);
@@ -125,7 +135,6 @@
             this.integerInput1.MinValue = 0;
             this.integerInput1.Name = "integerInput1";
             this.integerInput1.ShowUpDown = true;
-            this.integerInput1.Size = new System.Drawing.Size(80, 21);
             this.integerInput1.TabIndex = 1;
             this.integerInput1.ValueChanged += new System.EventHandler(this.integerInput1_ValueChanged);
             // 
@@ -143,7 +152,6 @@
             this.integerInput2.MinValue = 0;
             this.integerInput2.Name = "integerInput2";
             this.integerInput2.ShowUpDown = true;
-            this.integerInput2.Size = new System.Drawing.Size(80, 21);
             this.integerInput2.TabIndex = 2;
             this.integerInput2.Value = 1;
             this.integerInput2.ValueChanged += new System.EventHandler(this.integerInput2_ValueChanged);
@@ -160,7 +168,7 @@
             this.txtUrl.Location = new System.Drawing.Point(12, 62);
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.ReadOnly = true;
-            this.txtUrl.Size = new System.Drawing.Size(304, 21);
+            this.txtUrl.Size = new System.Drawing.Size(304, 20);
             this.txtUrl.TabIndex = 3;
             // 
             // buttonXPatch
@@ -173,7 +181,7 @@
             this.buttonXPatch.Size = new System.Drawing.Size(40, 25);
             this.buttonXPatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXPatch.TabIndex = 8;
-            this.buttonXPatch.Text = "패치";
+            this.buttonXPatch.Text = "Patch";
             this.buttonXPatch.Click += new System.EventHandler(this.buttonXPatch_Click);
             // 
             // chkDeadPatch
@@ -186,11 +194,18 @@
             this.chkDeadPatch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkDeadPatch.Location = new System.Drawing.Point(81, 87);
             this.chkDeadPatch.Name = "chkDeadPatch";
-            this.chkDeadPatch.Size = new System.Drawing.Size(82, 16);
+            this.chkDeadPatch.Size = new System.Drawing.Size(165, 15);
             this.chkDeadPatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkDeadPatch, new DevComponents.DotNetBar.SuperTooltipInfo("즉시 패치", "", "각 파일을 패치한 후 즉시 원본 파일에 덮어씁니다. 임시 파일이 필요한 공간을 줄일 수 있으나, 중간에 중단될 경우 위험할 수 있습니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 100)));
+            superTooltipInfo11.BodyText = "Immediately override the original file after each file is patched, this will save" +
+    " you some storage but if the patch is interrupted, your game could get corrupted" +
+    ".";
+            superTooltipInfo11.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo11.CustomSize = new System.Drawing.Size(180, 100);
+            superTooltipInfo11.FooterVisible = false;
+            superTooltipInfo11.HeaderText = "Patch (Override immediately)";
+            this.superTooltip1.SetSuperTooltip(this.chkDeadPatch, superTooltipInfo11);
             this.chkDeadPatch.TabIndex = 7;
-            this.chkDeadPatch.Text = "즉시 패치";
+            this.chkDeadPatch.Text = "Patch (Override immediately)";
             // 
             // chkPrePatch
             // 
@@ -202,11 +217,17 @@
             this.chkPrePatch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkPrePatch.Location = new System.Drawing.Point(6, 87);
             this.chkPrePatch.Name = "chkPrePatch";
-            this.chkPrePatch.Size = new System.Drawing.Size(76, 16);
+            this.chkPrePatch.Size = new System.Drawing.Size(101, 15);
             this.chkPrePatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkPrePatch, new DevComponents.DotNetBar.SuperTooltipInfo("패치 요약", "", "실제 패치를 적용하기 전에 패치가 필요한 파일을 확인하고, 자유롭게 선택한 파일만 패치할 수 있습니다.", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(180, 120)));
+            superTooltipInfo2.BodyText = "You can view which files are going to updated in the patch and manually select fi" +
+    "les that you want to patch.";
+            superTooltipInfo2.Color = DevComponents.DotNetBar.eTooltipColor.Default;
+            superTooltipInfo2.CustomSize = new System.Drawing.Size(180, 120);
+            superTooltipInfo2.FooterVisible = false;
+            superTooltipInfo2.HeaderText = "Patch Summary";
+            this.superTooltip1.SetSuperTooltip(this.chkPrePatch, superTooltipInfo2);
             this.chkPrePatch.TabIndex = 6;
-            this.chkPrePatch.Text = "패치 요약";
+            this.chkPrePatch.Text = "Patch Summary";
             // 
             // buttonXOpen2
             // 
@@ -218,7 +239,7 @@
             this.buttonXOpen2.Size = new System.Drawing.Size(33, 21);
             this.buttonXOpen2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXOpen2.TabIndex = 4;
-            this.buttonXOpen2.Text = "열기";
+            this.buttonXOpen2.Text = "Open";
             this.buttonXOpen2.Click += new System.EventHandler(this.buttonXOpen2_Click);
             // 
             // txtMSFolder
@@ -232,7 +253,7 @@
             this.txtMSFolder.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtMSFolder.Location = new System.Drawing.Point(68, 59);
             this.txtMSFolder.Name = "txtMSFolder";
-            this.txtMSFolder.Size = new System.Drawing.Size(259, 21);
+            this.txtMSFolder.Size = new System.Drawing.Size(259, 20);
             this.txtMSFolder.TabIndex = 3;
             // 
             // labelX2
@@ -245,9 +266,9 @@
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Location = new System.Drawing.Point(7, 61);
             this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(62, 16);
+            this.labelX2.Size = new System.Drawing.Size(58, 15);
             this.labelX2.TabIndex = 5;
-            this.labelX2.Text = "메이플스토리";
+            this.labelX2.Text = "MapleStory";
             // 
             // buttonXOpen1
             // 
@@ -259,7 +280,7 @@
             this.buttonXOpen1.Size = new System.Drawing.Size(33, 21);
             this.buttonXOpen1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXOpen1.TabIndex = 1;
-            this.buttonXOpen1.Text = "열기";
+            this.buttonXOpen1.Text = "Open";
             this.buttonXOpen1.Click += new System.EventHandler(this.buttonXOpen1_Click);
             // 
             // txtPatchFile
@@ -273,7 +294,7 @@
             this.txtPatchFile.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtPatchFile.Location = new System.Drawing.Point(68, 34);
             this.txtPatchFile.Name = "txtPatchFile";
-            this.txtPatchFile.Size = new System.Drawing.Size(259, 21);
+            this.txtPatchFile.Size = new System.Drawing.Size(259, 20);
             this.txtPatchFile.TabIndex = 0;
             // 
             // labelX1
@@ -286,9 +307,9 @@
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Location = new System.Drawing.Point(7, 36);
             this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(62, 16);
+            this.labelX1.Size = new System.Drawing.Size(51, 15);
             this.labelX1.TabIndex = 2;
-            this.labelX1.Text = "패치 파일";
+            this.labelX1.Text = "Patch File";
             // 
             // expandablePanel1
             // 
@@ -320,7 +341,7 @@
             this.expandablePanel1.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.expandablePanel1.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.expandablePanel1.TitleStyle.GradientAngle = 90;
-            this.expandablePanel1.TitleText = "패치 파일 다운로드 주소";
+            this.expandablePanel1.TitleText = "Patch File Download Link";
             // 
             // buttonXCheck
             // 
@@ -332,7 +353,7 @@
             this.buttonXCheck.Size = new System.Drawing.Size(41, 23);
             this.buttonXCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXCheck.TabIndex = 4;
-            this.buttonXCheck.Text = "확인";
+            this.buttonXCheck.Text = "Check";
             this.buttonXCheck.Click += new System.EventHandler(this.buttonXCheck_Click);
             // 
             // expandablePanel2
@@ -376,7 +397,29 @@
             this.expandablePanel2.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.expandablePanel2.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.expandablePanel2.TitleStyle.GradientAngle = 90;
-            this.expandablePanel2.TitleText = "수동 패쳐";
+            this.expandablePanel2.TitleText = "Manual Patcher";
+            // 
+            // chkResolvePngLink
+            // 
+            this.chkResolvePngLink.AutoSize = true;
+            this.chkResolvePngLink.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkResolvePngLink.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkResolvePngLink.Location = new System.Drawing.Point(290, 111);
+            this.chkResolvePngLink.Name = "chkResolvePngLink";
+            this.chkResolvePngLink.Size = new System.Drawing.Size(104, 15);
+            this.chkResolvePngLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            superTooltipInfo3.BodyText = "Don\'t display if the linked PNG file is same as compared to the one in the new pa" +
+    "tch";
+            superTooltipInfo3.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo3.CustomSize = new System.Drawing.Size(180, 72);
+            superTooltipInfo3.FooterVisible = false;
+            superTooltipInfo3.HeaderText = "Follow PNG Link";
+            this.superTooltip1.SetSuperTooltip(this.chkResolvePngLink, superTooltipInfo3);
+            this.chkResolvePngLink.TabIndex = 18;
+            this.chkResolvePngLink.Text = "Follow PNG Link";
             // 
             // chkOutputRemovedImg
             // 
@@ -388,11 +431,16 @@
             this.chkOutputRemovedImg.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkOutputRemovedImg.Location = new System.Drawing.Point(198, 135);
             this.chkOutputRemovedImg.Name = "chkOutputRemovedImg";
-            this.chkOutputRemovedImg.Size = new System.Drawing.Size(125, 16);
+            this.chkOutputRemovedImg.Size = new System.Drawing.Size(125, 15);
             this.chkOutputRemovedImg.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkOutputRemovedImg, new DevComponents.DotNetBar.SuperTooltipInfo("제거된 img 출력", "", "제거된 img를 출력합니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 60)));
+            superTooltipInfo4.BodyText = "Displays removed img";
+            superTooltipInfo4.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo4.CustomSize = new System.Drawing.Size(180, 60);
+            superTooltipInfo4.FooterVisible = false;
+            superTooltipInfo4.HeaderText = "Display removed img";
+            this.superTooltip1.SetSuperTooltip(this.chkOutputRemovedImg, superTooltipInfo4);
             this.chkOutputRemovedImg.TabIndex = 14;
-            this.chkOutputRemovedImg.Text = "제거된 img 출력";
+            this.chkOutputRemovedImg.Text = "Display removed img";
             // 
             // chkOutputAddedImg
             // 
@@ -404,25 +452,36 @@
             this.chkOutputAddedImg.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkOutputAddedImg.Location = new System.Drawing.Point(79, 135);
             this.chkOutputAddedImg.Name = "chkOutputAddedImg";
-            this.chkOutputAddedImg.Size = new System.Drawing.Size(113, 16);
+            this.chkOutputAddedImg.Size = new System.Drawing.Size(113, 15);
             this.chkOutputAddedImg.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkOutputAddedImg, new DevComponents.DotNetBar.SuperTooltipInfo("추가된 img 출력", "", "추가된 img를 출력합니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 60)));
+            superTooltipInfo5.BodyText = "Displays added img";
+            superTooltipInfo5.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo5.CustomSize = new System.Drawing.Size(180, 60);
+            superTooltipInfo5.FooterVisible = false;
+            superTooltipInfo5.HeaderText = "Display added img";
+            this.superTooltip1.SetSuperTooltip(this.chkOutputAddedImg, superTooltipInfo5);
             this.chkOutputAddedImg.TabIndex = 13;
-            this.chkOutputAddedImg.Text = "추가된 img 출력";
+            this.chkOutputAddedImg.Text = "Display added img";
             // 
             // cmbComparePng
             // 
             this.cmbComparePng.DisplayMember = "Text";
             this.cmbComparePng.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbComparePng.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbComparePng.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbComparePng.FormattingEnabled = true;
             this.cmbComparePng.ItemHeight = 15;
             this.cmbComparePng.Location = new System.Drawing.Point(79, 108);
             this.cmbComparePng.Name = "cmbComparePng";
             this.cmbComparePng.Size = new System.Drawing.Size(120, 21);
             this.cmbComparePng.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.cmbComparePng, new DevComponents.DotNetBar.SuperTooltipInfo("PNG 비교", "", "PNG 비교 방식을 지정합니다.\r\nSizeOnly - 이미지 크기만 비교\r\nSizeAndDataLength - 이미지 크기와 용량만 비교" +
-            "\r\nPixel - 모든 픽셀 비교 (오래 걸릴 수 있음)", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, true, new System.Drawing.Size(300, 100)));
+            superTooltipInfo6.BodyText = "Select how PNGs are going to compared.\r\nSizeOnly - Compare Image size only\r\nSizeA" +
+    "ndDataLength - Compare Image size and length\r\nPixel - Compare every pixel(May ta" +
+    "ke a while)";
+            superTooltipInfo6.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo6.CustomSize = new System.Drawing.Size(300, 100);
+            superTooltipInfo6.HeaderText = "Compare PNG";
+            this.superTooltip1.SetSuperTooltip(this.cmbComparePng, superTooltipInfo6);
             this.cmbComparePng.TabIndex = 12;
             // 
             // chkOutputPng
@@ -438,11 +497,16 @@
             this.chkOutputPng.CheckValue = "Y";
             this.chkOutputPng.Location = new System.Drawing.Point(208, 111);
             this.chkOutputPng.Name = "chkOutputPng";
-            this.chkOutputPng.Size = new System.Drawing.Size(82, 16);
+            this.chkOutputPng.Size = new System.Drawing.Size(132, 15);
             this.chkOutputPng.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkOutputPng, new DevComponents.DotNetBar.SuperTooltipInfo("PNG, 오디오 파일 출력", "", "PNG, 오디오 파일을 출력합니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 60)));
+            superTooltipInfo12.BodyText = "Display PNG and Audio file in Compare HTML.";
+            superTooltipInfo12.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo12.CustomSize = new System.Drawing.Size(180, 60);
+            superTooltipInfo12.FooterVisible = false;
+            superTooltipInfo12.HeaderText = "Export PNG, Audio file";
+            this.superTooltip1.SetSuperTooltip(this.chkOutputPng, superTooltipInfo12);
             this.chkOutputPng.TabIndex = 11;
-            this.chkOutputPng.Text = "PNG, 오디오 파일 출력";
+            this.chkOutputPng.Text = "Export PNG, Audio file";
             // 
             // chkCompare
             // 
@@ -454,11 +518,16 @@
             this.chkCompare.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkCompare.Location = new System.Drawing.Point(6, 111);
             this.chkCompare.Name = "chkCompare";
-            this.chkCompare.Size = new System.Drawing.Size(70, 16);
+            this.chkCompare.Size = new System.Drawing.Size(87, 15);
             this.chkCompare.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkCompare, new DevComponents.DotNetBar.SuperTooltipInfo("Wz 비교", "", "패치와 함께 두 버전을 비교합니다.\r\n이 기능은 패치에 영향을 주지 않습니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(238, 100)));
+            superTooltipInfo8.BodyText = "Compare Wz while patching\r\nThis does not affect anything related to patching";
+            superTooltipInfo8.Color = DevComponents.DotNetBar.eTooltipColor.System;
+            superTooltipInfo8.CustomSize = new System.Drawing.Size(238, 100);
+            superTooltipInfo8.FooterVisible = false;
+            superTooltipInfo8.HeaderText = "Compare Wz";
+            this.superTooltip1.SetSuperTooltip(this.chkCompare, superTooltipInfo8);
             this.chkCompare.TabIndex = 10;
-            this.chkCompare.Text = "Wz 비교";
+            this.chkCompare.Text = "Compare Wz";
             // 
             // panelEx2
             // 
@@ -499,18 +568,18 @@
             this.superTabControl1.ControlBox.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.superTabControl1.ControlBox.MenuBox,
             this.superTabControl1.ControlBox.CloseBox});
-            this.superTabControl1.Controls.Add(this.superTabControlPanel1);
             this.superTabControl1.Controls.Add(this.superTabControlPanel2);
+            this.superTabControl1.Controls.Add(this.superTabControlPanel1);
             this.superTabControl1.Controls.Add(this.superTabControlPanel3);
             this.superTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControl1.Location = new System.Drawing.Point(0, 0);
             this.superTabControl1.Name = "superTabControl1";
             this.superTabControl1.ReorderTabsEnabled = true;
-            this.superTabControl1.SelectedTabFont = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Bold);
+            this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Dotum", 9F, System.Drawing.FontStyle.Bold);
             this.superTabControl1.SelectedTabIndex = 1;
             this.superTabControl1.Size = new System.Drawing.Size(360, 180);
             this.superTabControl1.TabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Left;
-            this.superTabControl1.TabFont = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.superTabControl1.TabFont = new System.Drawing.Font("Dotum", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.superTabControl1.TabIndex = 2;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.superTabItem1,
@@ -527,6 +596,7 @@
             this.superTabControlPanel1.Size = new System.Drawing.Size(297, 180);
             this.superTabControlPanel1.TabIndex = 1;
             this.superTabControlPanel1.TabItem = this.superTabItem1;
+            this.superTabControlPanel1.Visible = false;
             // 
             // txtNotice
             // 
@@ -549,15 +619,15 @@
             this.superTabItem1.AttachedControl = this.superTabControlPanel1;
             this.superTabItem1.GlobalItem = false;
             this.superTabItem1.Name = "superTabItem1";
-            this.superTabItem1.Text = "알림";
+            this.superTabItem1.Text = "Alert";
             // 
             // superTabControlPanel2
             // 
             this.superTabControlPanel2.Controls.Add(this.advTreePatchFiles);
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel2.Location = new System.Drawing.Point(63, 0);
+            this.superTabControlPanel2.Location = new System.Drawing.Point(236, 0);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(257, 180);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(124, 180);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
@@ -581,7 +651,6 @@
             this.advTreePatchFiles.DoubleClickTogglesNode = false;
             this.advTreePatchFiles.DragDropNodeCopyEnabled = false;
             this.advTreePatchFiles.DropAsChildOffset = 65535;
-            this.advTreePatchFiles.Enabled = true;
             this.advTreePatchFiles.ExpandWidth = 0;
             this.advTreePatchFiles.GridRowLines = true;
             this.advTreePatchFiles.Location = new System.Drawing.Point(0, 0);
@@ -591,7 +660,7 @@
             this.advTreePatchFiles.NodesConnector = this.nodeConnector1;
             this.advTreePatchFiles.NodeStyle = this.elementStyle1;
             this.advTreePatchFiles.PathSeparator = ";";
-            this.advTreePatchFiles.Size = new System.Drawing.Size(257, 180);
+            this.advTreePatchFiles.Size = new System.Drawing.Size(124, 180);
             this.advTreePatchFiles.Styles.Add(this.elementStyle1);
             this.advTreePatchFiles.TabIndex = 0;
             this.advTreePatchFiles.Text = "advTree1";
@@ -599,40 +668,40 @@
             // columnHeader1
             // 
             this.columnHeader1.Name = "columnHeader1";
-            this.columnHeader1.Text = "파일명";
+            this.columnHeader1.Text = "File Name";
             this.columnHeader1.Width.Absolute = 100;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Editable = false;
             this.columnHeader2.Name = "columnHeader2";
-            this.columnHeader2.Text = "패치 유형";
+            this.columnHeader2.Text = "Patch Type";
             this.columnHeader2.Width.Absolute = 70;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Editable = false;
             this.columnHeader3.Name = "columnHeader3";
-            this.columnHeader3.Text = "용량";
+            this.columnHeader3.Text = "Size";
             this.columnHeader3.Width.Absolute = 70;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Editable = false;
             this.columnHeader4.Name = "columnHeader4";
-            this.columnHeader4.Text = "패치 후 체크섬";
+            this.columnHeader4.Text = "Postpatch Checksum";
             this.columnHeader4.Width.Absolute = 70;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Name = "columnHeader5";
-            this.columnHeader5.Text = "패치 전 체크섬";
+            this.columnHeader5.Text = "Prepatch Checksum";
             this.columnHeader5.Width.Absolute = 70;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Name = "columnHeader6";
-            this.columnHeader6.Text = "동작";
+            this.columnHeader6.Text = "Action";
             this.columnHeader6.Width.Absolute = 150;
             // 
             // nodeConnector1
@@ -650,7 +719,7 @@
             this.superTabItem2.AttachedControl = this.superTabControlPanel2;
             this.superTabItem2.GlobalItem = false;
             this.superTabItem2.Name = "superTabItem2";
-            this.superTabItem2.Text = "파일";
+            this.superTabItem2.Text = "File";
             // 
             // superTabControlPanel3
             // 
@@ -662,6 +731,7 @@
             this.superTabControlPanel3.Size = new System.Drawing.Size(257, 180);
             this.superTabControlPanel3.TabIndex = 0;
             this.superTabControlPanel3.TabItem = this.superTabItem3;
+            this.superTabControlPanel3.Visible = false;
             // 
             // txtPatchState
             // 
@@ -697,7 +767,7 @@
             this.superTabItem3.AttachedControl = this.superTabControlPanel3;
             this.superTabItem3.GlobalItem = false;
             this.superTabItem3.Name = "superTabItem3";
-            this.superTabItem3.Text = "상태";
+            this.superTabItem3.Text = "Status";
             // 
             // panelEx1
             // 
@@ -753,7 +823,7 @@
             this.expandablePanel3.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.expandablePanel3.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.expandablePanel3.TitleStyle.GradientAngle = 90;
-            this.expandablePanel3.TitleText = "패치 되돌리기";
+            this.expandablePanel3.TitleText = "Reverse Patch";
             // 
             // buttonXCreate
             // 
@@ -765,7 +835,7 @@
             this.buttonXCreate.Size = new System.Drawing.Size(48, 21);
             this.buttonXCreate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXCreate.TabIndex = 12;
-            this.buttonXCreate.Text = "만들기";
+            this.buttonXCreate.Text = "Create";
             this.buttonXCreate.Click += new System.EventHandler(this.buttonXCreate_Click);
             // 
             // txtPatchFile2
@@ -779,7 +849,7 @@
             this.txtPatchFile2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtPatchFile2.Location = new System.Drawing.Point(68, 34);
             this.txtPatchFile2.Name = "txtPatchFile2";
-            this.txtPatchFile2.Size = new System.Drawing.Size(259, 21);
+            this.txtPatchFile2.Size = new System.Drawing.Size(259, 20);
             this.txtPatchFile2.TabIndex = 6;
             // 
             // buttonXOpen4
@@ -792,7 +862,7 @@
             this.buttonXOpen4.Size = new System.Drawing.Size(33, 21);
             this.buttonXOpen4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXOpen4.TabIndex = 10;
-            this.buttonXOpen4.Text = "열기";
+            this.buttonXOpen4.Text = "Open";
             this.buttonXOpen4.Click += new System.EventHandler(this.buttonXOpen4_Click);
             // 
             // buttonXOpen3
@@ -805,7 +875,7 @@
             this.buttonXOpen3.Size = new System.Drawing.Size(33, 21);
             this.buttonXOpen3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonXOpen3.TabIndex = 7;
-            this.buttonXOpen3.Text = "열기";
+            this.buttonXOpen3.Text = "Open";
             this.buttonXOpen3.Click += new System.EventHandler(this.buttonXOpen3_Click);
             // 
             // txtMSFolder2
@@ -819,7 +889,7 @@
             this.txtMSFolder2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtMSFolder2.Location = new System.Drawing.Point(68, 59);
             this.txtMSFolder2.Name = "txtMSFolder2";
-            this.txtMSFolder2.Size = new System.Drawing.Size(259, 21);
+            this.txtMSFolder2.Size = new System.Drawing.Size(259, 20);
             this.txtMSFolder2.TabIndex = 9;
             // 
             // labelX4
@@ -832,9 +902,9 @@
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX4.Location = new System.Drawing.Point(7, 61);
             this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(62, 16);
+            this.labelX4.Size = new System.Drawing.Size(58, 15);
             this.labelX4.TabIndex = 11;
-            this.labelX4.Text = "메이플스토리";
+            this.labelX4.Text = "MapleStory";
             // 
             // labelX5
             // 
@@ -846,9 +916,9 @@
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.Location = new System.Drawing.Point(7, 36);
             this.labelX5.Name = "labelX5";
-            this.labelX5.Size = new System.Drawing.Size(62, 16);
+            this.labelX5.Size = new System.Drawing.Size(51, 15);
             this.labelX5.TabIndex = 8;
-            this.labelX5.Text = "패치 파일";
+            this.labelX5.Text = "Patch File";
             // 
             // labelX3
             // 
@@ -860,29 +930,13 @@
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Location = new System.Drawing.Point(12, 86);
             this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(285, 18);
+            this.labelX3.Size = new System.Drawing.Size(179, 15);
             this.labelX3.TabIndex = 1;
-            this.labelX3.Text = "이 기능은 불안정합니다. 주의해서 사용하세요.";
+            this.labelX3.Text = "Be advised, This feature is unstable.";
             // 
             // superTooltip1
             // 
-            this.superTooltip1.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-            // 
-            // chkResolvePngLink
-            // 
-            this.chkResolvePngLink.AutoSize = true;
-            this.chkResolvePngLink.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkResolvePngLink.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkResolvePngLink.Location = new System.Drawing.Point(290, 111);
-            this.chkResolvePngLink.Name = "chkResolvePngLink";
-            this.chkResolvePngLink.Size = new System.Drawing.Size(95, 16);
-            this.chkResolvePngLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.superTooltip1.SetSuperTooltip(this.chkResolvePngLink, new DevComponents.DotNetBar.SuperTooltipInfo("PNG 링크 따라가기", "", "링크된 PNG와 비교하여 같을 경우 출력하지 않습니다.", null, null, DevComponents.DotNetBar.eTooltipColor.System, true, false, new System.Drawing.Size(180, 72)));
-            this.chkResolvePngLink.TabIndex = 18;
-            this.chkResolvePngLink.Text = "PNG 링크 따라가기";
+            this.superTooltip1.DefaultTooltipSettings = superTooltipInfo10;
             // 
             // FrmPatcher
             // 
@@ -892,8 +946,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmPatcher";
-            this.Text = "패쳐";
+            this.Text = "Patcher";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmPatcher_FormClosed);
+            this.Load += new System.EventHandler(this.FrmPatcher_Load);
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             this.expandablePanel1.ResumeLayout(false);

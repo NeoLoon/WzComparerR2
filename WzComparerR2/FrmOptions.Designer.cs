@@ -77,7 +77,7 @@
             this.buttonX2.Size = new System.Drawing.Size(60, 23);
             this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX2.TabIndex = 1;
-            this.buttonX2.Text = "취소";
+            this.buttonX2.Text = "Cancel";
             // 
             // buttonX1
             // 
@@ -90,7 +90,7 @@
             this.buttonX1.Size = new System.Drawing.Size(60, 23);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 0;
-            this.buttonX1.Text = "확인";
+            this.buttonX1.Text = "OK";
             // 
             // superTabControl1
             // 
@@ -153,7 +153,7 @@
             this.chkAutoCheckExtFiles.Size = new System.Drawing.Size(193, 18);
             this.chkAutoCheckExtFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkAutoCheckExtFiles.TabIndex = 4;
-            this.chkAutoCheckExtFiles.Text = "Wz 분할 자동 감지 (Map2.wz 등)";
+            this.chkAutoCheckExtFiles.Text = "Automatically Detect Separated Wz (Ex. Map2.wz)";
             // 
             // cmbWzEncoding
             // 
@@ -180,7 +180,7 @@
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(68, 18);
             this.labelX1.TabIndex = 2;
-            this.labelX1.Text = "Wz 인코딩";
+            this.labelX1.Text = "Wz Encoding";
             // 
             // chkWzAutoSort
             // 
@@ -195,14 +195,14 @@
             this.chkWzAutoSort.Size = new System.Drawing.Size(125, 18);
             this.chkWzAutoSort.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkWzAutoSort.TabIndex = 0;
-            this.chkWzAutoSort.Text = "Wz 자동 정렬";
+            this.chkWzAutoSort.Text = "Wz Auto Sort";
             // 
             // superTabItem1
             // 
             this.superTabItem1.AttachedControl = this.superTabControlPanel1;
             this.superTabItem1.GlobalItem = false;
             this.superTabItem1.Name = "superTabItem1";
-            this.superTabItem1.Text = "Wz 열기";
+            this.superTabItem1.Text = "Open Wz";
             // 
             // chkWzSortByImgID
             // 
@@ -217,7 +217,7 @@
             this.chkWzSortByImgID.Size = new System.Drawing.Size(107, 18);
             this.chkWzSortByImgID.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkWzSortByImgID.TabIndex = 5;
-            this.chkWzSortByImgID.Text = "Img ID로 정렬";
+            this.chkWzSortByImgID.Text = "Sort by Img ID";
             // 
             // chkImgCheckDisabled
             // 
@@ -232,7 +232,7 @@
             this.chkImgCheckDisabled.Size = new System.Drawing.Size(132, 18);
             this.chkImgCheckDisabled.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkImgCheckDisabled.TabIndex = 6;
-            this.chkImgCheckDisabled.Text = "Img 확인 비활성화";
+            this.chkImgCheckDisabled.Text = "Disable Img Check";
             // 
             // FrmOptions
             // 
@@ -246,7 +246,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "설정";
+            this.Text = "Options";
             this.panelEx1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).EndInit();
             this.superTabControl1.ResumeLayout(false);

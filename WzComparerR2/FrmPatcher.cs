@@ -102,16 +102,16 @@ namespace WzComparerR2
                 item.GetFileLength();
                 if (item.FileLength > 0)
                 {
-                    MessageBoxEx.Show(string.Format("용량 : {0:N0}B, 업로드 시각 : {1:yyyy-MM-dd HH:mm:ss}", item.FileLength, item.LastModified));
+                    MessageBoxEx.Show(string.Format("Size : {0:N0}B, Uploaded Date : {1:yyyy-MM-dd HH:mm:ss}", item.FileLength, item.LastModified));
                 }
                 else
                 {
-                    MessageBoxEx.Show("파일이 존재하지 않습니다.");
+                    MessageBoxEx.Show("File does not exist.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBoxEx.Show("오류 : " + ex.Message);
+                MessageBoxEx.Show("Error : " + ex.Message);
             }
         }
 
@@ -141,8 +141,8 @@ namespace WzComparerR2
         private void buttonXOpen1_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "패치 파일 열기";
-            dlg.Filter = "패치 파일 (*.patch;*.exe)|*.patch;*.exe";
+            dlg.Title = "Open Patch File";
+            dlg.Filter = "Patch File (*.patch;*.exe)|*.patch;*.exe";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtPatchFile.Text = dlg.FileName;
@@ -152,7 +152,7 @@ namespace WzComparerR2
         private void buttonXOpen2_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dlg = new FolderBrowserDialog();
-            dlg.Description = "메이플스토리 폴더를 선택하세요.";
+            dlg.Description = "Please Select the MapleStory folder.";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtMSFolder.Text = dlg.SelectedPath;
@@ -171,7 +171,7 @@ namespace WzComparerR2
                 }
                 else
                 {
-                    MessageBoxEx.Show("이미 패치가 진행중입니다.");
+                    MessageBoxEx.Show("There is a ongoing patch");
                     return;
                 }
             }
@@ -179,7 +179,7 @@ namespace WzComparerR2
             if (chkCompare.Checked)
             {
                 FolderBrowserDialog dlg = new FolderBrowserDialog();
-                dlg.Description = "비교 결과를 저장할 폴더를 선택하세요.";
+                dlg.Description = "Please select the folder to store save compared result.";
                 if (dlg.ShowDialog() != DialogResult.OK)
                 {
                     return;
@@ -221,14 +221,14 @@ namespace WzComparerR2
             {
                 patcher = new WzPatcher(patchFile);
                 patcher.PatchingStateChanged += new EventHandler<PatchingEventArgs>(patcher_PatchingStateChanged);
-                AppendStateText("패치 확인중... ");
+                AppendStateText("Verifying Patch... ");
                 patcher.OpenDecompress();
-                AppendStateText("완료\r\n");
-                AppendStateText("패치 준비중... \r\n");
+                AppendStateText("Complete\r\n");
+                AppendStateText("Preparing Patch... \r\n");
                 long decompressedSize = patcher.PrePatch();
-                AppendStateText("완료\r\n");
-                AppendStateText(string.Format("패치용량 : {0:N0}B...\r\n", decompressedSize));
-                AppendStateText(string.Format("패치할 파일 개수 : {0}개...\r\n",
+                AppendStateText("Complete\r\n");
+                AppendStateText(string.Format("Patch Size : {0:N0}B...\r\n", decompressedSize));
+                AppendStateText(string.Format("Number of files to patch : {0}...\r\n",
                     patcher.PatchParts == null ? -1 : patcher.PatchParts.Count));
                 txtNotice.Text = patcher.NoticeText;
                 foreach (PatchPartContext part in patcher.PatchParts)
@@ -243,7 +243,7 @@ namespace WzComparerR2
                 if (prePatch)
                 {
                     //advTreePatchFiles.Enabled = true;
-                    AppendStateText("패치할 파일을 선택한 후 패치 버튼을 눌러주세요...\r\n");
+                    AppendStateText("Please select files that you want to patch and press Patch button...\r\n");
                     waiting = true;
                     waitHandle.WaitOne();
                     //advTreePatchFiles.Enabled = false;
@@ -258,7 +258,7 @@ namespace WzComparerR2
                     }
                     patcher.PatchParts.Sort((part1, part2) => part1.Offset.CompareTo(part2.Offset));
                 }
-                AppendStateText("패치중...\r\n");
+                AppendStateText("Patching...\r\n");
                 DateTime time = DateTime.Now;
                 patcher.Patch(msFolder);
                 if (!string.IsNullOrEmpty(this.compareFolder))
@@ -283,15 +283,15 @@ namespace WzComparerR2
                     }
                 }
                 TimeSpan interval = DateTime.Now - time;
-                MessageBoxEx.Show(this, "패치완료: 소요 시간 " + interval.ToString(), "패쳐");
+                MessageBoxEx.Show(this, "Patch completed: Time elapsed" + interval.ToString(), "Patcher");
             }
             catch (ThreadAbortException)
             {
-                MessageBoxEx.Show("패치가 중단되었습니다.", "오류");
+                MessageBoxEx.Show("Patch was interrupted.", "Error");
             }
             catch (Exception ex)
             {
-                MessageBoxEx.Show(this, ex.ToString(), "오류");
+                MessageBoxEx.Show(this, ex.ToString(), "Error");
             }
             finally
             {
@@ -342,23 +342,23 @@ namespace WzComparerR2
             switch (e.State)
             {
                 case PatchingState.PatchStart:
-                    AppendStateText("[" + e.Part.FileName + "] 패치중\r\n");
+                    AppendStateText("[" + e.Part.FileName + "] Patching\r\n");
                     break;
                 case PatchingState.VerifyOldChecksumBegin:
-                    AppendStateText("  패치 전 체크섬 확인...");
+                    AppendStateText("  Checking for PrePatch checksum...");
                     progressBarX1.Maximum = e.Part.NewFileLength;
                     break;
                 case PatchingState.VerifyOldChecksumEnd:
-                    AppendStateText("  완료\r\n");
+                    AppendStateText("  Complete\r\n");
                     break;
                 case PatchingState.VerifyNewChecksumBegin:
-                    AppendStateText("  패치 후 체크섬 확인...");
+                    AppendStateText("  Checking for PostPatch checksum...");
                     break;
                 case PatchingState.VerifyNewChecksumEnd:
-                    AppendStateText("  완료\r\n");
+                    AppendStateText("  Complete\r\n");
                     break;
                 case PatchingState.TempFileCreated:
-                    AppendStateText("  임시 파일 작성 시작...\r\n");
+                    AppendStateText("  Writing Temporary Files...\r\n");
                     progressBarX1.Maximum = e.Part.NewFileLength;
                     break;
                 case PatchingState.TempFileBuildProcessChanged:
@@ -366,7 +366,7 @@ namespace WzComparerR2
                     progressBarX1.Text = string.Format("{0:N0}/{1:N0}", e.CurrentFileLength, e.Part.NewFileLength);
                     break;
                 case PatchingState.TempFileClosed:
-                    AppendStateText("  임시 파일 작성 완료...\r\n");
+                    AppendStateText("   Writing Complete...\r\n");
                     progressBarX1.Value = 0;
                     progressBarX1.Maximum = 0;
                     progressBarX1.Text = string.Empty;
@@ -422,7 +422,7 @@ namespace WzComparerR2
                                 //输出概况
                                 sw.WriteLine("<p class=\"wzf\">");
                                 sw.WriteLine("<table>");
-                                sw.WriteLine("<tr><th>파일명</th><th>신버전 용량</th><th>구버전 용량</th><th>변경</th><th>추가</th><th>제거</th></tr>");
+                                sw.WriteLine("<tr><th>File Name</th><th>Size of New Version</th><th>Size of Previous Version</th><th>Modified</th><th>Added</th><th>Removed</th></tr>");
                             }
                             comparer.EasyCompareWzStructures(wznew, wzold, this.compareFolder, sw);
                         }
@@ -443,14 +443,14 @@ namespace WzComparerR2
                             {
                                 ((WzPatcher)sender).SafeMove(part.TempFilePath, part.OldFilePath);
                             }
-                            AppendStateText("  파일 적용...\r\n");
+                            AppendStateText("  Applying patch to the file...\r\n");
                         }
                     }
 
                     if (string.IsNullOrEmpty(this.compareFolder) && this.deadPatch && e.Part.Type == 1)
                     {
                         ((WzPatcher)sender).SafeMove(e.Part.TempFilePath, e.Part.OldFilePath);
-                        AppendStateText("  파일 적용...\r\n");
+                        AppendStateText("  Applying patch to the file...\r\n");
                     }
                     break;
                 case PatchingState.CompareStarted:
@@ -480,9 +480,9 @@ namespace WzComparerR2
             style.TextAlignment = eStyleTextAlignment.Far;
             switch (part.Type)
             {
-                case 0: node.Cells.Add(new Cell("추가", style)); break;
-                case 1: node.Cells.Add(new Cell("변경", style)); break;
-                case 2: node.Cells.Add(new Cell("제거", style)); break;
+                case 0: node.Cells.Add(new Cell("Added", style)); break;
+                case 1: node.Cells.Add(new Cell("Modified", style)); break;
+                case 2: node.Cells.Add(new Cell("Removed", style)); break;
                 default: node.Cells.Add(new Cell(part.Type.ToString(), style)); break;
             }
             node.Cells.Add(new Cell(part.NewFileLength.ToString("n0"), style));
@@ -521,8 +521,8 @@ namespace WzComparerR2
         private void buttonXOpen3_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "패치 파일 열기";
-            dlg.Filter = "패치 파일 (*.patch;*.exe)|*.patch;*.exe";
+            dlg.Title = "Open Patch File";
+            dlg.Filter = "Patch File (*.patch;*.exe)|*.patch;*.exe";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtPatchFile2.Text = dlg.FileName;
@@ -532,7 +532,7 @@ namespace WzComparerR2
         private void buttonXOpen4_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dlg = new FolderBrowserDialog();
-            dlg.Description = "메이플스토리 폴더를 선택하세요.";
+            dlg.Description = "Please Select the MapleStory folder.";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtMSFolder2.Text = dlg.SelectedPath;
@@ -548,8 +548,8 @@ namespace WzComparerR2
 > 没优化 于是可能生成文件体积较大 但是几乎可以保证完整性", "声明");
 
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "패치 파일 (*.patch)|*.patch";
-            dlg.Title = "패치 파일 저장";
+            dlg.Filter = "Patch File (*.patch)|*.patch";
+            dlg.Title = "Save Patch File";
             dlg.CheckFileExists = false;
             dlg.InitialDirectory = Path.GetDirectoryName(txtPatchFile2.Text);
             dlg.FileName = Path.GetFileNameWithoutExtension(txtPatchFile2.Text) + "_reverse.patch";
@@ -568,6 +568,11 @@ namespace WzComparerR2
                 {
                 }
             }
+        }
+
+        private void FrmPatcher_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

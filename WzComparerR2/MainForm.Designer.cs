@@ -142,6 +142,7 @@
             this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
             this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
             this.btnItemOpenWz = new DevComponents.DotNetBar.ButtonItem();
+            this.btnItemOpenImg = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemClose = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemCloseAll = new DevComponents.DotNetBar.ButtonItem();
             this.galleryContainerRecent = new DevComponents.DotNetBar.GalleryContainer();
@@ -251,7 +252,6 @@
             this.dockSite3 = new DevComponents.DotNetBar.DockSite();
             this.dockContainerItem2 = new DevComponents.DotNetBar.DockContainerItem();
             this.panelDockContainer2 = new DevComponents.DotNetBar.PanelDockContainer();
-            this.btnItemOpenImg = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
@@ -289,7 +289,6 @@
             this.ribbonControl1.Controls.Add(this.ribbonPanel1);
             this.ribbonControl1.Controls.Add(this.ribbonPanel3);
             this.ribbonControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            //this.ribbonControl1.Expanded = false;
             this.ribbonControl1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ribbonTabItem1,
             this.ribbonTabItem2,
@@ -346,6 +345,7 @@
             // 
             this.ribbonPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanel2.TabIndex = 2;
+            this.ribbonPanel2.Visible = true;
             // 
             // ribbonBar8
             // 
@@ -574,7 +574,7 @@
             this.buttonItemQuickView.Name = "buttonItemQuickView";
             this.buttonItemQuickView.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainer42});
-            this.buttonItemQuickView.Text = "미리보기";
+            this.buttonItemQuickView.Text = "Preview";
             this.buttonItemQuickView.Click += new System.EventHandler(this.buttonItemQuickView_Click);
             // 
             // itemContainer42
@@ -597,14 +597,14 @@
             // 
             this.buttonItemAutoQuickView.AutoCheckOnClick = true;
             this.buttonItemAutoQuickView.Name = "buttonItemAutoQuickView";
-            this.buttonItemAutoQuickView.Text = "자동 미리보기";
-            this.buttonItemAutoQuickView.Tooltip = "자동 미리보기 설정/해제";
+            this.buttonItemAutoQuickView.Text = "Auto Preview";
+            this.buttonItemAutoQuickView.Tooltip = "Enable/Disable Auto Preview";
             this.buttonItemAutoQuickView.Click += new System.EventHandler(this.buttonItemAutoQuickView_Click);
             // 
             // buttonItemQuickViewSetting
             // 
             this.buttonItemQuickViewSetting.Name = "buttonItemQuickViewSetting";
-            this.buttonItemQuickViewSetting.Text = "설정";
+            this.buttonItemQuickViewSetting.Text = "Settings";
             this.buttonItemQuickViewSetting.Click += new System.EventHandler(this.buttonItemQuickViewSetting_Click);
             // 
             // itemContainer26
@@ -626,7 +626,7 @@
             this.buttonItemSetItems.Name = "buttonItemSetItems";
             this.buttonItemSetItems.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainer43});
-            this.buttonItemSetItems.Text = "불러온 정보";
+            this.buttonItemSetItems.Text = "Loaded Items";
             // 
             // itemContainer43
             // 
@@ -698,8 +698,8 @@
             // 
             this.buttonItemCharItem.AutoCheckOnClick = true;
             this.buttonItemCharItem.Name = "buttonItemCharItem";
-            this.buttonItemCharItem.Text = "인벤토리";
-            this.buttonItemCharItem.Tooltip = "인벤토리 열기/닫기";
+            this.buttonItemCharItem.Text = "Inventory";
+            this.buttonItemCharItem.Tooltip = "Open/Close Inventory";
             this.buttonItemCharItem.CheckedChanged += new System.EventHandler(this.buttonItemCharItem_CheckedChanged);
             // 
             // itemContainer30
@@ -720,8 +720,8 @@
             // 
             this.buttonItemCharaStat.AutoCheckOnClick = true;
             this.buttonItemCharaStat.Name = "buttonItemCharaStat";
-            this.buttonItemCharaStat.Text = "능력치";
-            this.buttonItemCharaStat.Tooltip = "능력치 열기/닫기";
+            this.buttonItemCharaStat.Text = "Stat";
+            this.buttonItemCharaStat.Tooltip = "Open/Close Stat Window";
             this.buttonItemCharaStat.CheckedChanged += new System.EventHandler(this.buttonItemCharaStat_CheckedChanged);
             // 
             // itemContainer31
@@ -742,8 +742,8 @@
             // 
             this.buttonItemCharaEquip.AutoCheckOnClick = true;
             this.buttonItemCharaEquip.Name = "buttonItemCharaEquip";
-            this.buttonItemCharaEquip.Text = "장비창";
-            this.buttonItemCharaEquip.Tooltip = "장비창 열기/닫기";
+            this.buttonItemCharaEquip.Text = "Equip";
+            this.buttonItemCharaEquip.Tooltip = "Open/Close Equip";
             this.buttonItemCharaEquip.CheckedChanged += new System.EventHandler(this.buttonItemCharaEquip_CheckedChanged);
             // 
             // itemContainer32
@@ -780,8 +780,8 @@
             // buttonItemAddItem
             // 
             this.buttonItemAddItem.Name = "buttonItemAddItem";
-            this.buttonItemAddItem.Text = "아이템 추가";
-            this.buttonItemAddItem.Tooltip = "인벤토리에 선택한 아이템 추가";
+            this.buttonItemAddItem.Text = "Add Item";
+            this.buttonItemAddItem.Tooltip = "Add the selected item to the inventory";
             this.buttonItemAddItem.Click += new System.EventHandler(this.buttonItemAddItem_Click);
             // 
             // itemContainer34
@@ -877,7 +877,7 @@
             // labelItemSoundTitle
             // 
             this.labelItemSoundTitle.Name = "labelItemSoundTitle";
-            this.labelItemSoundTitle.Text = "플레이어";
+            this.labelItemSoundTitle.Text = "Sound Player";
             this.labelItemSoundTitle.Width = 254;
             // 
             // itemContainer9
@@ -907,7 +907,7 @@
             // checkBoxItemSoundLoop
             // 
             this.checkBoxItemSoundLoop.Name = "checkBoxItemSoundLoop";
-            this.checkBoxItemSoundLoop.Text = "반복";
+            this.checkBoxItemSoundLoop.Text = "Repeat";
             this.checkBoxItemSoundLoop.CheckedChanged += new DevComponents.DotNetBar.CheckBoxChangeEventHandler(this.checkBoxItemSoundLoop_CheckedChanged);
             // 
             // itemContainer18
@@ -1047,7 +1047,7 @@
             // 
             this.buttonItemPatcher.Name = "buttonItemPatcher";
             this.buttonItemPatcher.SubItemsExpandWidth = 14;
-            this.buttonItemPatcher.Text = "패쳐";
+            this.buttonItemPatcher.Text = "Patcher";
             this.buttonItemPatcher.Click += new System.EventHandler(this.buttonItemPatcher_Click);
             // 
             // ribbonBar4
@@ -1122,7 +1122,6 @@
             // 
             this.textBoxItemSearchString.Name = "textBoxItemSearchString";
             this.textBoxItemSearchString.TextBoxWidth = 110;
-            this.textBoxItemSearchString.WatermarkColor = System.Drawing.SystemColors.GrayText;
             this.textBoxItemSearchString.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxItemSearchString_KeyDown);
             // 
             // itemContainer11
@@ -1143,7 +1142,7 @@
             // checkBoxItemExact2
             // 
             this.checkBoxItemExact2.Name = "checkBoxItemExact2";
-            this.checkBoxItemExact2.Text = "정확히";
+            this.checkBoxItemExact2.Text = "Exact";
             // 
             // comboBoxItem2
             // 
@@ -1215,13 +1214,13 @@
             this.buttonItemSearchString.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSelectStringWz,
             this.buttonItemClearStringWz});
-            this.buttonItemSearchString.Text = "찾기";
+            this.buttonItemSearchString.Text = "Find";
             this.buttonItemSearchString.Click += new System.EventHandler(this.buttonItemSearchString_Click);
             // 
             // buttonItemSelectStringWz
             // 
             this.buttonItemSelectStringWz.Name = "buttonItemSelectStringWz";
-            this.buttonItemSelectStringWz.Text = "Ba&se.wz 선택";
+            this.buttonItemSelectStringWz.Text = "Select Ba&se.wz";
             this.buttonItemSelectStringWz.Click += new System.EventHandler(this.buttonItemSelectStringWz_Click);
             // 
             // buttonItemClearStringWz
@@ -1303,7 +1302,6 @@
             this.textBoxItemSearchWz.MaxLength = 50;
             this.textBoxItemSearchWz.Name = "textBoxItemSearchWz";
             this.textBoxItemSearchWz.TextBoxWidth = 98;
-            this.textBoxItemSearchWz.WatermarkColor = System.Drawing.SystemColors.GrayText;
             this.textBoxItemSearchWz.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxItemSearchWz_KeyDown);
             // 
             // itemContainer16
@@ -1324,7 +1322,7 @@
             // checkBoxItemExact1
             // 
             this.checkBoxItemExact1.Name = "checkBoxItemExact1";
-            this.checkBoxItemExact1.Text = "정확히";
+            this.checkBoxItemExact1.Text = "Exact";
             // 
             // comboBoxItem1
             // 
@@ -1368,7 +1366,7 @@
             // buttonItemSearchWz
             // 
             this.buttonItemSearchWz.Name = "buttonItemSearchWz";
-            this.buttonItemSearchWz.Text = "다음 찾기";
+            this.buttonItemSearchWz.Text = "Find Next";
             this.buttonItemSearchWz.Click += new System.EventHandler(this.buttonItemSearchWz_Click);
             // 
             // ribbonPanel3
@@ -1432,7 +1430,7 @@
             // 
             this.buttonItem1.Name = "buttonItem1";
             this.buttonItem1.SubItemsExpandWidth = 14;
-            this.buttonItem1.Text = "테스트";
+            this.buttonItem1.Text = "Test";
             this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
             // 
             // ribbonBar7
@@ -1470,7 +1468,7 @@
             // 
             this.buttonItemUpdate.Name = "buttonItemUpdate";
             this.buttonItemUpdate.SubItemsExpandWidth = 14;
-            this.buttonItemUpdate.Text = "업데이트";
+            this.buttonItemUpdate.Text = "Update";
             this.buttonItemUpdate.Click += new System.EventHandler(this.buttonItemUpdate_Click);
             // 
             // ribbonBar6
@@ -1508,7 +1506,7 @@
             // 
             this.buttonItemAbout.Name = "buttonItemAbout";
             this.buttonItemAbout.SubItemsExpandWidth = 14;
-            this.buttonItemAbout.Text = "정보";
+            this.buttonItemAbout.Text = "About";
             this.buttonItemAbout.Click += new System.EventHandler(this.buttonItemAbout_Click);
             // 
             // ribbonTabItem1
@@ -1516,7 +1514,7 @@
             this.ribbonTabItem1.Name = "ribbonTabItem1";
             this.ribbonTabItem1.Panel = this.ribbonPanel1;
             this.ribbonTabItem1.Tag = "Tools";
-            this.ribbonTabItem1.Text = "도구(&T)";
+            this.ribbonTabItem1.Text = "Tools(&T)";
             // 
             // ribbonTabItem2
             // 
@@ -1524,21 +1522,21 @@
             this.ribbonTabItem2.Name = "ribbonTabItem2";
             this.ribbonTabItem2.Panel = this.ribbonPanel2;
             this.ribbonTabItem2.Tag = "Modules";
-            this.ribbonTabItem2.Text = "기능(&M)";
+            this.ribbonTabItem2.Text = "Modules(&M)";
             // 
             // ribbonTabItem3
             // 
             this.ribbonTabItem3.Name = "ribbonTabItem3";
             this.ribbonTabItem3.Panel = this.ribbonPanel3;
             this.ribbonTabItem3.Tag = "Help";
-            this.ribbonTabItem3.Text = "도움말(&H)";
+            this.ribbonTabItem3.Text = "Help(&H)";
             // 
             // buttonItemStyle
             // 
             this.buttonItemStyle.AutoExpandOnClick = true;
             this.buttonItemStyle.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
             this.buttonItemStyle.Name = "buttonItemStyle";
-            this.buttonItemStyle.Text = "테마(&S)";
+            this.buttonItemStyle.Text = "Theme(&S)";
             // 
             // office2007StartButton1
             // 
@@ -1552,7 +1550,7 @@
             this.office2007StartButton1.ShowSubItems = false;
             this.office2007StartButton1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainer1});
-            this.office2007StartButton1.Text = "파일(&F)";
+            this.office2007StartButton1.Text = "File(&F)";
             // 
             // itemContainer1
             // 
@@ -1613,21 +1611,27 @@
             this.btnItemOpenWz.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.btnItemOpenWz.Name = "btnItemOpenWz";
             this.btnItemOpenWz.SubItemsExpandWidth = 24;
-            this.btnItemOpenWz.Text = "Wz 열기(&O)...";
+            this.btnItemOpenWz.Text = "Open Wz(&O)...";
             this.btnItemOpenWz.Click += new System.EventHandler(this.btnItemOpenWz_Click);
+            // 
+            // btnItemOpenImg
+            // 
+            this.btnItemOpenImg.Name = "btnItemOpenImg";
+            this.btnItemOpenImg.Text = "Open Img...";
+            this.btnItemOpenImg.Click += new System.EventHandler(this.btnItemOpenImg_Click);
             // 
             // buttonItemClose
             // 
             this.buttonItemClose.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.buttonItemClose.Name = "buttonItemClose";
             this.buttonItemClose.SubItemsExpandWidth = 24;
-            this.buttonItemClose.Text = "닫기(&C)";
+            this.buttonItemClose.Text = "Close(&C)";
             this.buttonItemClose.Click += new System.EventHandler(this.buttonItemClose_Click);
             // 
             // buttonItemCloseAll
             // 
             this.buttonItemCloseAll.Name = "buttonItemCloseAll";
-            this.buttonItemCloseAll.Text = "모두 닫기";
+            this.buttonItemCloseAll.Text = "Close All";
             this.buttonItemCloseAll.Click += new System.EventHandler(this.buttonItemCloseAll_Click);
             // 
             // galleryContainerRecent
@@ -1659,7 +1663,7 @@
             this.labelItem8.PaddingBottom = 2;
             this.labelItem8.PaddingTop = 2;
             this.labelItem8.Stretch = true;
-            this.labelItem8.Text = "최근 문서";
+            this.labelItem8.Text = "Recently Opened...";
             // 
             // itemContainer4
             // 
@@ -1685,7 +1689,7 @@
             this.btnItemOptions.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnItemOptions.Name = "btnItemOptions";
             this.btnItemOptions.SubItemsExpandWidth = 24;
-            this.btnItemOptions.Text = "설정(&I)";
+            this.btnItemOptions.Text = "Options(&I)";
             this.btnItemOptions.Click += new System.EventHandler(this.btnItemOptions_Click);
             // 
             // buttonItem13
@@ -1695,7 +1699,7 @@
             this.buttonItem13.Enabled = false;
             this.buttonItem13.Name = "buttonItem13";
             this.buttonItem13.SubItemsExpandWidth = 24;
-            this.buttonItem13.Text = "끝내기(&X)";
+            this.buttonItem13.Text = "Terminate(&X)";
             // 
             // styleManager1
             // 
@@ -1745,7 +1749,7 @@
             // labelItemStatus
             // 
             this.labelItemStatus.Name = "labelItemStatus";
-            this.labelItemStatus.Text = "상태 표시줄";
+            this.labelItemStatus.Text = "Status";
             this.labelItemStatus.TextChanged += new System.EventHandler(this.labelItemStatus_TextChanged);
             // 
             // progressBarItem1
@@ -1829,10 +1833,10 @@
             this.superTabControl1.Location = new System.Drawing.Point(0, 0);
             this.superTabControl1.Name = "superTabControl1";
             this.superTabControl1.ReorderTabsEnabled = true;
-            this.superTabControl1.SelectedTabFont = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Bold);
-            this.superTabControl1.SelectedTabIndex = 0;
+            this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Dotum", 9F, System.Drawing.FontStyle.Bold);
+            this.superTabControl1.SelectedTabIndex = 2;
             this.superTabControl1.Size = new System.Drawing.Size(530, 228);
-            this.superTabControl1.TabFont = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.superTabControl1.TabFont = new System.Drawing.Font("Dotum", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.superTabControl1.TabIndex = 0;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnNodeBack,
@@ -1849,9 +1853,9 @@
             this.superTabControlPanel1.Controls.Add(this.expandableSplitter1);
             this.superTabControlPanel1.Controls.Add(this.panelEx1);
             this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel1.Location = new System.Drawing.Point(0, 0);
+            this.superTabControlPanel1.Location = new System.Drawing.Point(0, 26);
             this.superTabControlPanel1.Name = "superTabControlPanel1";
-            this.superTabControlPanel1.Size = new System.Drawing.Size(530, 228);
+            this.superTabControlPanel1.Size = new System.Drawing.Size(530, 202);
             this.superTabControlPanel1.TabIndex = 1;
             this.superTabControlPanel1.TabItem = this.superTabItem1;
             // 
@@ -1866,7 +1870,7 @@
             this.panelEx2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx2.Location = new System.Drawing.Point(238, 0);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(292, 228);
+            this.panelEx2.Size = new System.Drawing.Size(292, 202);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -1888,7 +1892,7 @@
             this.pictureBoxEx1.PictureName = null;
             this.pictureBoxEx1.ShowInfo = true;
             this.pictureBoxEx1.ShowPositionGridOnDrag = true;
-            this.pictureBoxEx1.Size = new System.Drawing.Size(292, 123);
+            this.pictureBoxEx1.Size = new System.Drawing.Size(292, 97);
             this.pictureBoxEx1.TabIndex = 7;
             this.pictureBoxEx1.Text = "pictureBoxEx1";
             // 
@@ -1911,7 +1915,7 @@
             this.cmbItemSkins,
             this.buttonItemSaveImage,
             this.buttonItemGif});
-            this.ribbonBar5.Location = new System.Drawing.Point(0, 202);
+            this.ribbonBar5.Location = new System.Drawing.Point(0, 176);
             this.ribbonBar5.Name = "ribbonBar5";
             this.ribbonBar5.Size = new System.Drawing.Size(292, 26);
             this.ribbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1952,7 +1956,7 @@
             this.buttonItemSaveImage.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainer27});
             this.buttonItemSaveImage.SubItemsExpandWidth = 14;
-            this.buttonItemSaveImage.Text = "그림 저장";
+            this.buttonItemSaveImage.Text = "Save Image";
             this.buttonItemSaveImage.Click += new System.EventHandler(this.buttonItemSaveImage_Click);
             // 
             // itemContainer27
@@ -1975,7 +1979,7 @@
             // 
             this.buttonItemAutoSave.AutoCheckOnClick = true;
             this.buttonItemAutoSave.Name = "buttonItemAutoSave";
-            this.buttonItemAutoSave.Text = "자동 경로 지정";
+            this.buttonItemAutoSave.Text = "Auto Select Save Directory";
             this.buttonItemAutoSave.Click += new System.EventHandler(this.buttonItemAutoSave_Click);
             // 
             // buttonItemAutoSaveFolder
@@ -1983,7 +1987,7 @@
             this.buttonItemAutoSaveFolder.Name = "buttonItemAutoSaveFolder";
             this.buttonItemAutoSaveFolder.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemAutoSaveFolder});
-            this.buttonItemAutoSaveFolder.Text = "저장할 폴더 선택";
+            this.buttonItemAutoSaveFolder.Text = "Select Auto Save Directory";
             this.buttonItemAutoSaveFolder.Click += new System.EventHandler(this.buttonItemAutoSaveFolder_Click);
             // 
             // labelItemAutoSaveFolder
@@ -2006,7 +2010,7 @@
             this.buttonItemGif.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainer36});
             this.buttonItemGif.SubItemsExpandWidth = 14;
-            this.buttonItemGif.Text = "Gif 활성화";
+            this.buttonItemGif.Text = "Enable Gif";
             this.buttonItemGif.Click += new System.EventHandler(this.buttonItemGif_Click);
             // 
             // itemContainer36
@@ -2027,7 +2031,7 @@
             // buttonItemGifSetting
             // 
             this.buttonItemGifSetting.Name = "buttonItemGifSetting";
-            this.buttonItemGifSetting.Text = "Gif 설정";
+            this.buttonItemGifSetting.Text = "Gif Setting";
             this.buttonItemGifSetting.Click += new System.EventHandler(this.buttonItemGifSetting_Click);
             // 
             // textBoxX1
@@ -2075,7 +2079,7 @@
             this.expandableSplitter1.HotGripLightColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
             this.expandableSplitter1.Location = new System.Drawing.Point(233, 0);
             this.expandableSplitter1.Name = "expandableSplitter1";
-            this.expandableSplitter1.Size = new System.Drawing.Size(5, 228);
+            this.expandableSplitter1.Size = new System.Drawing.Size(5, 202);
             this.expandableSplitter1.Style = DevComponents.DotNetBar.eSplitterStyle.Office2007;
             this.expandableSplitter1.TabIndex = 1;
             this.expandableSplitter1.TabStop = false;
@@ -2090,7 +2094,7 @@
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(233, 228);
+            this.panelEx1.Size = new System.Drawing.Size(233, 202);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -2124,7 +2128,7 @@
             this.advTree3.NodesConnector = this.nodeConnector3;
             this.advTree3.NodeStyle = this.elementStyle3;
             this.advTree3.PathSeparator = ";";
-            this.advTree3.Size = new System.Drawing.Size(227, 142);
+            this.advTree3.Size = new System.Drawing.Size(227, 116);
             this.advTree3.Styles.Add(this.elementStyle3);
             this.advTree3.TabIndex = 1;
             this.advTree3.Text = "advTree3";
@@ -2166,91 +2170,91 @@
             this.tsmi2Prev,
             this.tsmi2Next});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(196, 198);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(184, 248);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // tsmi2SaveAs
             // 
             this.tsmi2SaveAs.Name = "tsmi2SaveAs";
             this.tsmi2SaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tsmi2SaveAs.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2SaveAs.Size = new System.Drawing.Size(183, 22);
             this.tsmi2SaveAs.Text = "저장...";
             this.tsmi2SaveAs.Click += new System.EventHandler(this.tsmi2SaveAs_Click);
             // 
             // tsmi2HandleUol
             // 
             this.tsmi2HandleUol.Name = "tsmi2HandleUol";
-            this.tsmi2HandleUol.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2HandleUol.Size = new System.Drawing.Size(183, 22);
             this.tsmi2HandleUol.Text = "Uol 따라가기";
             this.tsmi2HandleUol.Click += new System.EventHandler(this.tsmi2HandleUol_Click);
             // 
             // tsmi2Splitter1
             // 
             this.tsmi2Splitter1.Name = "tsmi2Splitter1";
-            this.tsmi2Splitter1.Size = new System.Drawing.Size(192, 6);
+            this.tsmi2Splitter1.Size = new System.Drawing.Size(180, 6);
             // 
             // tsmi2ExpandAll
             // 
             this.tsmi2ExpandAll.Name = "tsmi2ExpandAll";
-            this.tsmi2ExpandAll.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2ExpandAll.Size = new System.Drawing.Size(183, 22);
             this.tsmi2ExpandAll.Text = "모두 확장(&E)";
             this.tsmi2ExpandAll.Click += new System.EventHandler(this.tsmi2ExpandAll_Click);
             // 
             // tsmi2CollapseAll
             // 
             this.tsmi2CollapseAll.Name = "tsmi2CollapseAll";
-            this.tsmi2CollapseAll.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2CollapseAll.Size = new System.Drawing.Size(183, 22);
             this.tsmi2CollapseAll.Text = "모두 축소(&C)";
             this.tsmi2CollapseAll.Click += new System.EventHandler(this.tsmi2CollapseAll_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 6);
             // 
             // tsmi2ExpandLevel
             // 
             this.tsmi2ExpandLevel.Name = "tsmi2ExpandLevel";
-            this.tsmi2ExpandLevel.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2ExpandLevel.Size = new System.Drawing.Size(183, 22);
             this.tsmi2ExpandLevel.Text = "동일 단계 확장(&X)";
             this.tsmi2ExpandLevel.Click += new System.EventHandler(this.tsmi2ExpandLevel_Click);
             // 
             // tsmi2CollapseLevel
             // 
             this.tsmi2CollapseLevel.Name = "tsmi2CollapseLevel";
-            this.tsmi2CollapseLevel.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2CollapseLevel.Size = new System.Drawing.Size(183, 22);
             this.tsmi2CollapseLevel.Text = "동일 단계 축소(&O)";
             this.tsmi2CollapseLevel.Click += new System.EventHandler(this.tsmi2CollapseLevel_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(192, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 6);
             // 
             // tsmi2ExpandType
             // 
             this.tsmi2ExpandType.Name = "tsmi2ExpandType";
-            this.tsmi2ExpandType.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2ExpandType.Size = new System.Drawing.Size(183, 22);
             this.tsmi2ExpandType.Text = "동일 유형 확장(&A)";
             this.tsmi2ExpandType.Click += new System.EventHandler(this.tsmi2ExpandType_Click);
             // 
             // tsmi2CollapseType
             // 
             this.tsmi2CollapseType.Name = "tsmi2CollapseType";
-            this.tsmi2CollapseType.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2CollapseType.Size = new System.Drawing.Size(183, 22);
             this.tsmi2CollapseType.Text = "동일 유형 축소(&L)";
             this.tsmi2CollapseType.Click += new System.EventHandler(this.tsmi2CollapseType_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(192, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 6);
             // 
             // tsmi2Prev
             // 
             this.tsmi2Prev.Name = "tsmi2Prev";
             this.tsmi2Prev.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.tsmi2Prev.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2Prev.Size = new System.Drawing.Size(183, 22);
             this.tsmi2Prev.Text = "이동 취소(&P)";
             this.tsmi2Prev.Click += new System.EventHandler(this.tsmi2Prev_Click);
             // 
@@ -2258,7 +2262,7 @@
             // 
             this.tsmi2Next.Name = "tsmi2Next";
             this.tsmi2Next.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.tsmi2Next.Size = new System.Drawing.Size(195, 22);
+            this.tsmi2Next.Size = new System.Drawing.Size(183, 22);
             this.tsmi2Next.Text = "다시 이동(&N)";
             this.tsmi2Next.Click += new System.EventHandler(this.tsmi2Next_Click);
             // 
@@ -2317,7 +2321,7 @@
             this.superTabItem1.AttachedControl = this.superTabControlPanel1;
             this.superTabItem1.GlobalItem = false;
             this.superTabItem1.Name = "superTabItem1";
-            this.superTabItem1.Text = "Wz 보기";
+            this.superTabItem1.Text = "View Wz";
             // 
             // superTabControlPanel2
             // 
@@ -2336,6 +2340,7 @@
             this.superTabControlPanel2.Size = new System.Drawing.Size(530, 228);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
+            this.superTabControlPanel2.Visible = false;
             // 
             // chkResolvePngLink
             // 
@@ -2348,7 +2353,7 @@
             this.chkResolvePngLink.Size = new System.Drawing.Size(107, 23);
             this.chkResolvePngLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkResolvePngLink.TabIndex = 9;
-            this.chkResolvePngLink.Text = "PNG 링크 따라가기";
+            this.chkResolvePngLink.Text = "Follow PNG Link";
             // 
             // chkOutputRemovedImg
             // 
@@ -2361,7 +2366,7 @@
             this.chkOutputRemovedImg.Size = new System.Drawing.Size(135, 23);
             this.chkOutputRemovedImg.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkOutputRemovedImg.TabIndex = 8;
-            this.chkOutputRemovedImg.Text = "제거된 img 출력";
+            this.chkOutputRemovedImg.Text = "Display removed img";
             // 
             // chkOutputAddedImg
             // 
@@ -2374,7 +2379,7 @@
             this.chkOutputAddedImg.Size = new System.Drawing.Size(135, 23);
             this.chkOutputAddedImg.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkOutputAddedImg.TabIndex = 7;
-            this.chkOutputAddedImg.Text = "추가된 img 출력";
+            this.chkOutputAddedImg.Text = "Display added img";
             // 
             // labelX1
             // 
@@ -2385,7 +2390,6 @@
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Location = new System.Drawing.Point(34, 39);
             this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(44, 16);
             this.labelX1.TabIndex = 6;
             this.labelX1.Text = "PNG :";
             // 
@@ -2403,13 +2407,14 @@
             this.chkOutputPng.Size = new System.Drawing.Size(107, 23);
             this.chkOutputPng.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkOutputPng.TabIndex = 5;
-            this.chkOutputPng.Text = "PNG, 오디오 파일 출력";
+            this.chkOutputPng.Text = "Export PNG, Audio File";
             // 
             // cmbComparePng
             // 
             this.cmbComparePng.DisplayMember = "Text";
             this.cmbComparePng.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbComparePng.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbComparePng.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbComparePng.FormattingEnabled = true;
             this.cmbComparePng.ItemHeight = 15;
             this.cmbComparePng.Location = new System.Drawing.Point(83, 36);
@@ -2427,7 +2432,6 @@
             this.labelXComp2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelXComp2.Location = new System.Drawing.Point(3, 113);
             this.labelXComp2.Name = "labelXComp2";
-            this.labelXComp2.Size = new System.Drawing.Size(44, 16);
             this.labelXComp2.TabIndex = 3;
             this.labelXComp2.Text = "detail";
             this.labelXComp2.TextLineAlignment = System.Drawing.StringAlignment.Near;
@@ -2441,7 +2445,6 @@
             this.labelXComp1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelXComp1.Location = new System.Drawing.Point(3, 91);
             this.labelXComp1.Name = "labelXComp1";
-            this.labelXComp1.Size = new System.Drawing.Size(31, 16);
             this.labelXComp1.TabIndex = 1;
             this.labelXComp1.Text = "tail";
             this.labelXComp1.TextLineAlignment = System.Drawing.StringAlignment.Near;
@@ -2455,7 +2458,7 @@
             this.btnEasyCompare.Size = new System.Drawing.Size(100, 30);
             this.btnEasyCompare.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEasyCompare.TabIndex = 0;
-            this.btnEasyCompare.Text = "비교";
+            this.btnEasyCompare.Text = "Compare";
             this.btnEasyCompare.Click += new System.EventHandler(this.btnEasyCompare_Click);
             // 
             // superTabItem2
@@ -2463,7 +2466,7 @@
             this.superTabItem2.AttachedControl = this.superTabControlPanel2;
             this.superTabItem2.GlobalItem = false;
             this.superTabItem2.Name = "superTabItem2";
-            this.superTabItem2.Text = "Wz 비교";
+            this.superTabItem2.Text = "Compare Wz";
             // 
             // superTabControlPanel3
             // 
@@ -2475,6 +2478,7 @@
             this.superTabControlPanel3.Size = new System.Drawing.Size(530, 228);
             this.superTabControlPanel3.TabIndex = 0;
             this.superTabControlPanel3.TabItem = this.superTabItem3;
+            this.superTabControlPanel3.Visible = false;
             // 
             // btnExportSkillOption
             // 
@@ -2485,7 +2489,7 @@
             this.btnExportSkillOption.Size = new System.Drawing.Size(111, 23);
             this.btnExportSkillOption.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnExportSkillOption.TabIndex = 1;
-            this.btnExportSkillOption.Text = "스킬 옵션 내보내기";
+            this.btnExportSkillOption.Text = "Export Skill Option";
             this.btnExportSkillOption.Click += new System.EventHandler(this.btnExportSkillOption_Click);
             // 
             // btnExportSkill
@@ -2497,7 +2501,7 @@
             this.btnExportSkill.Size = new System.Drawing.Size(75, 23);
             this.btnExportSkill.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnExportSkill.TabIndex = 0;
-            this.btnExportSkill.Text = "스킬 내보내기";
+            this.btnExportSkill.Text = "Export Skill";
             this.btnExportSkill.Click += new System.EventHandler(this.btnExportSkill_Click);
             // 
             // superTabItem3
@@ -2505,7 +2509,7 @@
             this.superTabItem3.AttachedControl = this.superTabControlPanel3;
             this.superTabItem3.GlobalItem = false;
             this.superTabItem3.Name = "superTabItem3";
-            this.superTabItem3.Text = "데이터베이스";
+            this.superTabItem3.Text = "Database";
             // 
             // btnNodeBack
             // 
@@ -2657,32 +2661,32 @@
             this.tsmi1Export,
             this.tsmi1DumpAsXml});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 76);
             // 
             // tsmi1Sort
             // 
             this.tsmi1Sort.Name = "tsmi1Sort";
-            this.tsmi1Sort.Size = new System.Drawing.Size(154, 22);
-            this.tsmi1Sort.Text = "정렬(&S)";
+            this.tsmi1Sort.Size = new System.Drawing.Size(177, 22);
+            this.tsmi1Sort.Text = "Sort(&S)";
             this.tsmi1Sort.Click += new System.EventHandler(this.tsmi1Sort_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(151, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(174, 6);
             // 
             // tsmi1Export
             // 
             this.tsmi1Export.Name = "tsmi1Export";
-            this.tsmi1Export.Size = new System.Drawing.Size(154, 22);
-            this.tsmi1Export.Text = "내보내기(&E)";
+            this.tsmi1Export.Size = new System.Drawing.Size(177, 22);
+            this.tsmi1Export.Text = "Export(&E)";
             this.tsmi1Export.Click += new System.EventHandler(this.tsmi1Export_Click);
             // 
             // tsmi1DumpAsXml
             // 
             this.tsmi1DumpAsXml.Name = "tsmi1DumpAsXml";
-            this.tsmi1DumpAsXml.Size = new System.Drawing.Size(154, 22);
-            this.tsmi1DumpAsXml.Text = "XML로 내보내기(&D)";
+            this.tsmi1DumpAsXml.Size = new System.Drawing.Size(177, 22);
+            this.tsmi1DumpAsXml.Text = "Export as XML(&D)";
             this.tsmi1DumpAsXml.Click += new System.EventHandler(this.tsmi1DumpAsXml_Click);
             // 
             // elementStyle1
@@ -2722,22 +2726,22 @@
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "코드";
+            this.columnHeader6.Text = "Item Code";
             this.columnHeader6.Width = 80;
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "이름";
+            this.columnHeader7.Text = "Name";
             this.columnHeader7.Width = 100;
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "설명";
+            this.columnHeader8.Text = "Description";
             this.columnHeader8.Width = 350;
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "경로";
+            this.columnHeader9.Text = "Directory";
             this.columnHeader9.Width = 150;
             // 
             // comboItem1
@@ -2790,14 +2794,13 @@
             this.bar1.AccessibleName = "DotNetBar Bar";
             this.bar1.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.bar1.AutoSyncBarCaption = true;
-            this.bar1.CanCustomize = false;
             this.bar1.CanDockLeft = false;
             this.bar1.CanDockRight = false;
             this.bar1.CanDockTab = false;
             this.bar1.CanDockTop = false;
             this.bar1.CloseSingleTab = true;
             this.bar1.Controls.Add(this.panelDockContainer1);
-            this.bar1.Font = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.bar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.bar1.GrabHandleStyle = DevComponents.DotNetBar.eGrabHandleStyle.Caption;
             this.bar1.IsMaximized = false;
             this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -2810,7 +2813,7 @@
             this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bar1.TabIndex = 0;
             this.bar1.TabStop = false;
-            this.bar1.Text = "검색결과";
+            this.bar1.Text = "Search Result";
             // 
             // panelDockContainer1
             // 
@@ -2826,12 +2829,13 @@
             this.panelDockContainer1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
             this.panelDockContainer1.Style.GradientAngle = 90;
             this.panelDockContainer1.TabIndex = 0;
+            this.panelDockContainer1.Visible = true;
             // 
             // dockContainerItem1
             // 
             this.dockContainerItem1.Control = this.panelDockContainer1;
             this.dockContainerItem1.Name = "dockContainerItem1";
-            this.dockContainerItem1.Text = "검색결과";
+            this.dockContainerItem1.Text = "Search Result";
             // 
             // dockSite1
             // 
@@ -2923,12 +2927,7 @@
             this.panelDockContainer2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
             this.panelDockContainer2.Style.GradientAngle = 90;
             this.panelDockContainer2.TabIndex = 2;
-            // 
-            // btnItemOpenImg
-            // 
-            this.btnItemOpenImg.Name = "btnItemOpenImg";
-            this.btnItemOpenImg.Text = "Img 열기...";
-            this.btnItemOpenImg.Click += new System.EventHandler(this.btnItemOpenImg_Click);
+            this.panelDockContainer2.Visible = true;
             // 
             // MainForm
             // 
@@ -2948,6 +2947,7 @@
             this.MinimumSize = new System.Drawing.Size(750, 513);
             this.Name = "MainForm";
             this.Text = "WzComparerR2-KMS";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ribbonControl1.ResumeLayout(false);
             this.ribbonControl1.PerformLayout();
             this.ribbonPanel2.ResumeLayout(false);
