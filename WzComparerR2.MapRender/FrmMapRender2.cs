@@ -43,6 +43,7 @@ namespace WzComparerR2.MapRender
             this.patchVisibility.FootHoldVisible = false;
             this.patchVisibility.LadderRopeVisible = false;
             this.patchVisibility.SkyWhaleVisible = false;
+            this.patchVisibility.IlluminantClusterPathVisible = false;
             
             var form = Form.FromHandle(this.Window.Handle) as Form;
             form.Load += Form_Load;
@@ -223,6 +224,7 @@ namespace WzComparerR2.MapRender
                 this.patchVisibility.FootHoldVisible = !visible;
                 this.patchVisibility.LadderRopeVisible = !visible;
                 this.patchVisibility.SkyWhaleVisible = !visible;
+                this.patchVisibility.IlluminantClusterPathVisible = !visible;
             }), KeyCode.D7, ModifierKeys.Control));
             this.ui.InputBindings.Add(new KeyBinding(new RelayCommand(_ =>
             {
@@ -235,6 +237,7 @@ namespace WzComparerR2.MapRender
                     {
                         item.View.IsEditorMode = false;
                     }
+                    this.patchVisibility.IlluminantClusterVisible = true;
                 }
                 else if (!this.patchVisibility.PortalInEditMode)
                 {
@@ -243,6 +246,7 @@ namespace WzComparerR2.MapRender
                     {
                         item.View.IsEditorMode = true;
                     }
+                    this.patchVisibility.IlluminantClusterVisible = false;
                 }
                 else
                 {
@@ -419,7 +423,7 @@ namespace WzComparerR2.MapRender
                     int y = (int)point.Y;
                     var mouseTarget = this.allItems.Reverse<ItemRect>().FirstOrDefault(item =>
                     {
-                        return item.rect.Contains(x, y) && (item.item is PortalItem || item.item is ReactorItem);
+                        return item.rect.Contains(x, y) && (item.item is PortalItem || item.item is IlluminantClusterItem || item.item is ReactorItem);
                     });
                     return mouseTarget.item;
                 },
@@ -496,7 +500,7 @@ namespace WzComparerR2.MapRender
             }
         }
 
-        private void ChatCommand(string command)
+        private async void ChatCommand(string command)
         {
             string[] arguments = command.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
             if (arguments.Length <= 0)
@@ -616,7 +620,7 @@ namespace WzComparerR2.MapRender
                     this.ui.ChatBox.AppendTextHelp($"관련된 시각 개수: ({dateList.Count()})");
                     foreach (Tuple<long, long> item in dateList)
                     {
-                        this.ui.ChatBox.AppendTextHelp($"  {item.Item1} ~ {item.Item2}");
+                        this.ui.ChatBox.AppendTextHelp($"  {item.Item1} - {item.Item2}");
                     }
                     break;
 
@@ -631,6 +635,56 @@ namespace WzComparerR2.MapRender
                     else
                     {
                         this.ui.ChatBox.AppendTextSystem($"정확한 시각을 입력하세요.");
+                    }
+                    break;
+
+                case "/multibgmlist":
+                    if (!string.IsNullOrEmpty(this.mapData.Bgm))
+                    {
+                        var path = new List<string>() { "Sound" };
+                        path.AddRange(this.mapData.Bgm.Split('/'));
+                        path[1] += ".img";
+                        var bgmNode = PluginBase.PluginManager.FindWz(string.Join("\\", path));
+                        var subNodes = bgmNode?.Nodes ?? new Wz_Node.WzNodeCollection(null);
+                        this.ui.ChatBox.AppendTextHelp($"Multi BGM 개수: {subNodes.Count}");
+                        foreach (Wz_Node subNode in subNodes)
+                        {
+                            this.ui.ChatBox.AppendTextHelp($"  {subNode.Text}");
+                        }
+                    }
+                    else
+                    {
+                        this.ui.ChatBox.AppendTextHelp($"Multi BGM 개수: 0");
+                    }
+                    break;
+
+                case "/multibgmset":
+                    Music multiBgm;
+                    if (arguments.Length > 1 && (multiBgm = LoadBgm(this.mapData, arguments[1])) != null)
+                    {
+                        this.ui.ChatBox.AppendTextSystem($"Multi BGM을 {arguments[1]}(으)로 변경했습니다.");
+
+                        Task bgmTask = null;
+                        bool willSwitchBgm = this.bgm != multiBgm;
+                        if (willSwitchBgm && this.bgm != null) //准备切换
+                        {
+                            bgmTask = FadeOut(this.bgm, 1000);
+                        }
+
+                        if (bgmTask != null)
+                        {
+                            await bgmTask;
+                        }
+
+                        this.bgm = multiBgm;
+                        if (willSwitchBgm && this.bgm != null)
+                        {
+                            bgmTask = FadeIn(this.bgm, 1000);
+                        }
+                    }
+                    else
+                    {
+                        this.ui.ChatBox.AppendTextHelp($"정확한 Multi BGM을 입력하세요.");
                     }
                     break;
 

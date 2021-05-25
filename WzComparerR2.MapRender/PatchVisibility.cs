@@ -16,6 +16,7 @@ namespace WzComparerR2.MapRender
                 this.dictVisible[type] = true;
             }
             this.PortalInEditMode = false;
+            this.IlluminantClusterVisible = true;
         }
 
         public bool BackVisible
@@ -68,6 +69,8 @@ namespace WzComparerR2.MapRender
 
         public bool SkyWhaleVisible { get; set; }
 
+        public bool IlluminantClusterPathVisible { get; set; }
+
         public bool PortalVisible
         {
             get { return IsVisible(RenderObjectType.Portal); }
@@ -75,6 +78,8 @@ namespace WzComparerR2.MapRender
         }
 
         public bool PortalInEditMode { get; set; }
+
+        public bool IlluminantClusterVisible { get; set; }
 
         public bool FrontVisible
         {
