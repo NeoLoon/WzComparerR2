@@ -123,6 +123,10 @@ namespace WzComparerR2.CharaSimControl
                 string expireStr = time.ToString("유효기간 : yyyy년 M월 d일 H시 m분");
                 GearGraphics.DrawString(g, "#c" + sr2.Name + "의 " + expireStr + "#", GearGraphics.ItemDetailFont2, Skill.Icon.Bitmap == null ? 10 : 92, 414, ref picH, 16);
             }
+            if (Skill.IsPetAutoBuff)
+            {
+                GearGraphics.DrawString(g, "#c펫 버프 자동스킬 등록 가능#", GearGraphics.ItemDetailFont2, Skill.Icon.Bitmap == null ? 10 : 92, 414, ref picH, 16);
+            }
             /*if (Skill.ReqLevel > 0)
             {
                 GearGraphics.DrawString(g, "#c[要求等级：" + Skill.ReqLevel.ToString() + "]#", GearGraphics.ItemDetailFont2, 90, 270, ref picH, 16);

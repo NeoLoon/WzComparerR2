@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 using WzComparerR2.WzLib;
@@ -12,6 +13,7 @@ namespace WzComparerR2.CharaSim
         {
             this.Props = new Dictionary<ItemPropType, int>();
             this.Specs = new Dictionary<ItemSpecType, int>();
+            this.CoreSpecs = new Dictionary<ItemCoreSpecType, Wz_Node>();
             this.AddTooltips = new List<int>();
         }
 
@@ -23,6 +25,7 @@ namespace WzComparerR2.CharaSim
 
         public Dictionary<ItemPropType, int> Props { get; private set; }
         public Dictionary<ItemSpecType, int> Specs { get; private set; }
+        public Dictionary<ItemCoreSpecType, Wz_Node> CoreSpecs { get; private set; }
         public List<int> AddTooltips { get; internal set; } // Additional Tooltips
 
         public bool Cash
@@ -263,6 +266,28 @@ namespace WzComparerR2.CharaSim
                         finally
                         {
                         }
+                    }
+                }
+            }
+
+            Wz_Node coreSpecNode = node.FindNodeByPath("corespec");
+            if (coreSpecNode != null)
+            {
+                item.Props.Remove(ItemPropType.tradeBlock);
+                foreach (Wz_Node subNode in coreSpecNode.Nodes)
+                {
+                    ItemCoreSpecType type;
+                    if (Enum.TryParse(subNode.Text, out type))
+                    {
+                        item.CoreSpecs.Add(type, subNode);
+                    }
+                }
+                if (item.CoreSpecs.ContainsKey(ItemCoreSpecType.Ctrl_addMission))
+                {
+                    List<ItemCoreSpecType> removeSpecs = item.CoreSpecs.Keys.Where(k => k != ItemCoreSpecType.Ctrl_addMission).ToList();
+                    foreach (ItemCoreSpecType type in removeSpecs)
+                    {
+                        item.CoreSpecs.Remove(type);
                     }
                 }
             }

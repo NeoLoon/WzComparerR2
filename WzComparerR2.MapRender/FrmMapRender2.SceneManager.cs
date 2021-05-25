@@ -118,7 +118,7 @@ namespace WzComparerR2.MapRender
             music.Volume = 1f;
         }
 
-        private Music LoadBgm(MapData mapData)
+        private Music LoadBgm(MapData mapData, string multiBgmText = null)
         {
             if (!string.IsNullOrEmpty(mapData.Bgm))
             {
@@ -128,6 +128,14 @@ namespace WzComparerR2.MapRender
                 var bgmNode = PluginManager.FindWz(string.Join("\\", path));
                 if (bgmNode != null)
                 {
+                    if (bgmNode.Value == null)
+                    {
+                        bgmNode = multiBgmText == null ? bgmNode.Nodes.FirstOrDefault(n => n.Value is Wz_Sound || n.Value is Wz_Uol) : bgmNode.Nodes[multiBgmText];
+                        if (bgmNode == null)
+                        {
+                            return null;
+                        }
+                    }
                     while (bgmNode.Value is Wz_Uol uol)
                     {
                         bgmNode = uol.HandleUol(bgmNode);
@@ -243,6 +251,14 @@ namespace WzComparerR2.MapRender
                         }
                         break;
                 }
+            }
+            foreach (var illuminantCluster in mapData.Scene.IlluminantClusters)
+            {
+                this.ui.Minimap.Icons.Add(new UIMinimap2.MapIcon()
+                {
+                    IconType = UIMinimap2.IconType.HiddenPortal,
+                    WorldPosition = new EmptyKeys.UserInterface.PointF(illuminantCluster.Start.X, illuminantCluster.Start.Y)
+                });
             }
             foreach (var npc in mapData.Scene.Npcs)
             {

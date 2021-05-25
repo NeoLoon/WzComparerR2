@@ -140,6 +140,7 @@
     <Compile Include="CharaSim\Item.cs" />
     <Compile Include="CharaSim\ItemBase.cs" />
     <Compile Include="CharaSim\ItemBaseType.cs" />
+    <Compile Include="CharaSim\ItemCoreSpecType.cs" />
     <Compile Include="CharaSim\ItemPropType.cs" />
     <Compile Include="CharaSim\ItemSpecType.cs" />
     <Compile Include="CharaSim\ItemStringHelper.cs" />

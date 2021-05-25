@@ -94,9 +94,28 @@ namespace WzComparerR2.CharaSimControl
                             if (imgNode != null)
                             {
                                 Gear gear = Gear.CreateFromNode(imgNode, path=>PluginManager.FindWz(path));
-                                gear.Props[GearPropType.timeLimited] = 0;
                                 if (gear != null)
                                 {
+                                    gear.Props[GearPropType.timeLimited] = 0;
+                                    int tuc, tucCnt;
+                                    if (Item.Props.TryGetValue(ItemPropType.addTooltip_tuc, out tuc) && Item.Props.TryGetValue(ItemPropType.addTooltip_tucCnt, out tucCnt))
+                                    {
+                                        Wz_Node itemWz = PluginManager.FindWz(Wz_Type.Item);
+                                        if (itemWz != null)
+                                        {
+                                            string imgClass = (tuc / 10000).ToString("d4") + ".img\\" + tuc.ToString("d8") + "\\info";
+                                            foreach (Wz_Node node1 in itemWz.Nodes)
+                                            {
+                                                Wz_Node infoNode = node1.FindNodeByPath(imgClass, true);
+                                                if (infoNode != null)
+                                                {
+                                                    gear.Upgrade(infoNode, tucCnt);
+
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
                                     recipeItemBmps.Add(RenderLinkRecipeGear(gear));
                                 }
 
@@ -316,7 +335,7 @@ namespace WzComparerR2.CharaSimControl
             }
 
             SizeF titleSize = TextRenderer.MeasureText(g, sr.Name.Replace(Environment.NewLine, ""), GearGraphics.ItemNameFont2, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPrefix);
-            titleSize.Width += 12 * 2;
+            titleSize.Width += 9 * 2;
             if (titleSize.Width > 290)
             {
                 //重构大小
@@ -615,6 +634,11 @@ namespace WzComparerR2.CharaSimControl
                 if (!string.IsNullOrEmpty(attr))
                     GearGraphics.DrawString(g, "#c" + attr + "#", GearGraphics.ItemDetailFont2, 100, right, ref picH, 16);
             }
+            if (item.Props.TryGetValue(ItemPropType.pointCost, out value) && value > 0)
+            {
+                picH += 16;
+                GearGraphics.DrawString(g, "· " + value + " 포인트", GearGraphics.ItemDetailFont, 100, right, ref picH, 16);
+            }
             if (item.Specs.TryGetValue(ItemSpecType.recipeValidDay, out value) && value > 0)
             {
                 GearGraphics.DrawString(g, "( 제작 가능 기간 : " + value + "일 )", GearGraphics.ItemDetailFont, 100, right, ref picH, 16);
@@ -717,7 +741,7 @@ namespace WzComparerR2.CharaSimControl
                 && this.TryGetNickResource(value, out nickResNode);
             int minLev = 0, maxLev = 0;
             bool willDrawExp = item.Props.TryGetValue(ItemPropType.exp_minLev, out minLev) && item.Props.TryGetValue(ItemPropType.exp_maxLev, out maxLev);
-            if (!string.IsNullOrEmpty(sr["desc_leftalign"]) || item.Sample.Bitmap != null || willDrawNickTag || willDrawExp)
+            if (!string.IsNullOrEmpty(sr["desc_leftalign"]) || item.CoreSpecs.Count > 0 || item.Sample.Bitmap != null || willDrawNickTag || willDrawExp)
             {
                 if (picH < iconY + 84)
                 {
@@ -727,6 +751,45 @@ namespace WzComparerR2.CharaSimControl
                 {
                     picH += 12;
                     GearGraphics.DrawString(g, sr["desc_leftalign"], GearGraphics.ItemDetailFont, 14, right, ref picH, 16);
+                }
+                if (item.CoreSpecs.Count > 0)
+                {
+                    g.DrawLine(Pens.White, 6, picH - 1, tooltip.Width - 7, picH - 1);
+                    picH += 9;
+                    foreach (KeyValuePair<ItemCoreSpecType, Wz_Node> p in item.CoreSpecs)
+                    {
+                        string coreSpec;
+                        switch (p.Key)
+                        {
+                            case ItemCoreSpecType.Ctrl_addMob:
+                                StringResult srMob;
+                                if (StringLinker == null || !StringLinker.StringMob.TryGetValue(Convert.ToInt32(p.Value.Nodes["mobID"].Value), out srMob))
+                                {
+                                    srMob = new StringResult();
+                                    srMob.Name = "(null)";
+                                }
+                                foreach (Wz_Node addMobNode in p.Value.Nodes)
+                                {
+                                    if (int.TryParse(addMobNode.Text, out value))
+                                    {
+                                        break;
+                                    }
+                                }
+                                coreSpec = ItemStringHelper.GetItemCoreSpecString(ItemCoreSpecType.Ctrl_addMob, value, srMob.Name);
+                                break;
+
+                            default:
+                                try
+                                {
+                                    coreSpec = ItemStringHelper.GetItemCoreSpecString(p.Key, Convert.ToInt32(p.Value.Value), Convert.ToString(p.Value.Nodes["desc"]?.Value));
+                                }
+                                finally
+                                {
+                                }
+                                break;
+                        }
+                        GearGraphics.DrawString(g, "· " + coreSpec, GearGraphics.ItemDetailFont, 14, right, ref picH, 16);
+                    }
                 }
                 if (item.Sample.Bitmap != null)
                 {

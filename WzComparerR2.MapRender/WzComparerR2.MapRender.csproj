@@ -115,6 +115,7 @@
     <Compile Include="ParticleSystem.cs" />
     <Compile Include="Patches2\BackItem.cs" />
     <Compile Include="Patches2\FootholdItem.cs" />
+    <Compile Include="Patches2\IlluminantClusterItem.cs" />
     <Compile Include="Patches2\LadderRopeItem.cs" />
     <Compile Include="Patches2\LifeItem.cs" />
     <Compile Include="Patches2\ObjItem.cs" />

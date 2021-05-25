@@ -45,7 +45,11 @@ namespace WzComparerR2
         {
             this.advTree1.Nodes.Clear();
 
+<<<<<<< HEAD
             this.advTree1.Nodes.Add(new Node("KMS <font color=\"#808080\">v3.4.0N</font>"));
+=======
+            this.advTree1.Nodes.Add(new Node("KMS <font color=\"#808080\">v3.4.2</font>"));
+>>>>>>> f4c176c0fecca9679ff4d2a86791d531ba02e025
 
             foreach (var contribution in new[]
             {
@@ -64,7 +68,7 @@ namespace WzComparerR2
                 new Tuple<string, string>("[KMS] 사용 가능 직업 문구 오류 제보", "@tanyoucai"),
                 new Tuple<string, string>("[KMS] 퀘스트 상태 파티클 미적용 오류 제보", "메이플인벤 펄더"),
                 new Tuple<string, string>("[KMS] 아바타 오류 제보", "@giraffebin"),
-                new Tuple<string, string>("[KMS] 문구, 툴팁 위치 오류 수정 및 제보", "@OniOniOn-"),
+                new Tuple<string, string>("[KMS] 문구, 툴팁 위치 오류 수정 및 제보, 창 크기 저장 기능, 카인 지원 추가", "@OniOniOn-"),
                 new Tuple<string, string>("[KMS] 패치와 함께 비교시 오류 제보", "@lowrt"),
                 new Tuple<string, string>("[KMS] 아바타 모두 내보내기 오류 제보", "@pid011"),
                 new Tuple<string, string>("[KMS] 툴팁 관련 기능 추가, 오류 수정 및 제보", "@sh-cho"),

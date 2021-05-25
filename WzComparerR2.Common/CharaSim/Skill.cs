@@ -64,6 +64,7 @@ namespace WzComparerR2.CharaSim
         public bool VSkill { get; set; }
         public bool TimeLimited { get; set; }
         public Tuple<int, int> RelationSkill { get; set; }
+        public bool IsPetAutoBuff { get; set; }
         public bool DisableNextLevelInfo { get; set; }
         public int MasterLevel { get; set; }
         public Dictionary<int, int> ReqSkill { get; private set; }
@@ -165,6 +166,9 @@ namespace WzComparerR2.CharaSim
                         break;
                     case "relationSkill":
                         skill.RelationSkill = new Tuple<int, int>(childNode.Nodes["skillID"].GetValueEx<int>(0), childNode.Nodes["periodMin"].GetValueEx<int>(0));
+                        break;
+                    case "isPetAutoBuff":
+                        skill.IsPetAutoBuff = childNode.GetValue<int>() != 0;
                         break;
                     case "disableNextLevelInfo":
                         skill.DisableNextLevelInfo = childNode.GetValue<int>() != 0;
